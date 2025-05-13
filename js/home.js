@@ -184,15 +184,37 @@ function initGallery() {
             const img = item.querySelector('img');
             if (!img) return;
 
-            // Adicionar um efeito visual ao clicar na imagem
+            // Hitta olika bildversioner (desktop, mobil, tablet)
+            const imagePath = img.src.split('/').pop();  // Hämtar filnamnet från sökvägen
+            const imageBaseName = imagePath.replace(/\.[^/.]+$/, ""); // Ta bort filändelse
+            
+            console.log('Laddar bildvarianter för: ' + imageBaseName);
+            
+            // Försök hitta motsvarande mobil- och surfplattversioner
+            // Hanterar flera namnkonventioner som upptäckts i filerna
+            const mobileVersions = [
+                `${imageBaseName}VyMobile.jpg`,
+                `${imageBaseName}VyMobile..jpg`,
+                `${imageBaseName}VyTabletMobile.jpg`, // För filer som använder denna namnkonvention
+                `${imageBaseName} VyMobile.jpg` // För filer med mellanslag
+            ];
+            
+            const tabletVersions = [
+                `${imageBaseName}VyTablet.jpg`,
+                `${imageBaseName}VyTablet..jpg`,
+                `${imageBaseName}VyTablet.pg.jpg`, // För filer med .pg.jpg ändelse
+                `${imageBaseName} VyTablet.jpg` // För filer med mellanslag
+            ];
+
+            // Lägg till visuell effekt vid klick
             img.style.cursor = 'zoom-in';
 
-            // Garantir que o lightbox seja acessível via teclado
+            // Garantera att lightbox är tillgänglig via tangentbord
             item.setAttribute('role', 'button');
-            item.setAttribute('aria-label', `Visualizar imagem: ${img.alt}`);
+            item.setAttribute('aria-label', `Visa bild: ${img.alt}`);
             item.tabIndex = 0;
 
-            // Adicionar suporte para ativação via teclado
+            // Lägg till stöd för tangentbordsaktivering
             item.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault();
@@ -200,57 +222,238 @@ function initGallery() {
                 }
             });
 
-            // Atualizar o lightbox existente, se já estiver aberto
+            // Uppdatera existerande lightbox om den redan är öppen
             const existingLightbox = document.querySelector('.inline-lightbox');
             if (existingLightbox) {
-                const lightboxImage = existingLightbox.querySelector('.lightbox-image');
-                lightboxImage.src = img.src;
-                lightboxImage.alt = img.alt;
+                updateLightboxWithResponsiveImages(
+                    existingLightbox.querySelector('.lightbox-image'), 
+                    img.src, 
+                    img.alt, 
+                    mobileVersions, 
+                    tabletVersions
+                );
                 return;
             }
 
-            // Criar o container para a imagem ampliada
+            // Skapa container för den förstorade bilden
             const lightbox = document.createElement('div');
             lightbox.className = 'inline-lightbox';
-            lightbox.innerHTML = `
-                <div class="lightbox-content">
-                    <img src="${img.src}" alt="${img.alt}" class="lightbox-image" />
-                    <button class="close-lightbox" aria-label="Fechar visualização">&times;</button>
-                </div>
-            `;
+            
+            // Skapa grundläggande struktur för lightbox
+            const lightboxContent = document.createElement('div');
+            lightboxContent.className = 'lightbox-content';
+            
+            // Skapa bildkomponent
+            const lightboxImage = document.createElement('img');
+            lightboxImage.className = 'lightbox-image';
+            lightboxImage.alt = img.alt;
+            
+            // Skapa responsiv bildvisning med korrekt versionshantering
+            updateLightboxWithResponsiveImages(
+                lightboxImage, 
+                img.src, 
+                img.alt, 
+                mobileVersions, 
+                tabletVersions
+            );
+            
+            // Skapa stängknapp
+            const closeButton = document.createElement('button');
+            closeButton.className = 'close-lightbox';
+            closeButton.setAttribute('aria-label', 'Stäng förhandsgranskning');
+            closeButton.innerHTML = '&times;';
+            
+            // Skapa knappar för att växla mellan versioner
+            const versionButtons = document.createElement('div');
+            versionButtons.className = 'version-buttons';
+            
+            // Hjälpfunktion för att kontrollera bildtillgänglighet
+            const findAndLoadImage = function(versionList, onFound) {
+                const basePath = img.src.substring(0, img.src.lastIndexOf('/') + 1);
+                let imageFound = false;
+                
+                // Kontrollera alla möjliga versioner
+                const checkNextImage = function(index) {
+                    if (index >= versionList.length) {
+                        // Om vi har kontrollerat alla versioner och inte hittat någon
+                        console.log('Ingen version hittades');
+                        return;
+                    }
+                    
+                    const version = versionList[index];
+                    const imgUrl = basePath + 'assets/' + version;
+                    
+                    const testImage = new Image();
+                    testImage.onload = function() {
+                        // Om bilden finns, ladda den i lightbox
+                        imageFound = true;
+                        onFound(this.src);
+                    };
+                    testImage.onerror = function() {
+                        // Prova nästa version om den här inte finns
+                        if (!imageFound) {
+                            checkNextImage(index + 1);
+                        }
+                    };
+                    testImage.src = imgUrl;
+                };
+                
+                // Börja kontrollera från första versionen
+                checkNextImage(0);
+            };
+            
+            const desktopButton = createVersionButton('Desktop', () => {
+                // Desktop-versionen är redan laddad i img-elementet
+                lightboxImage.src = img.src;
+                
+                // Markera den aktiva knappen
+                document.querySelectorAll('.version-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                desktopButton.classList.add('active');
+            });
+            
+            const mobileButton = createVersionButton('Mobil', () => {
+                findAndLoadImage(mobileVersions, (src) => {
+                    lightboxImage.src = src;
+                    
+                    // Markera den aktiva knappen
+                    document.querySelectorAll('.version-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    mobileButton.classList.add('active');
+                });
+            });
+            
+            const tabletButton = createVersionButton('Surfplatta', () => {
+                findAndLoadImage(tabletVersions, (src) => {
+                    lightboxImage.src = src;
+                    
+                    // Markera den aktiva knappen
+                    document.querySelectorAll('.version-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    tabletButton.classList.add('active');
+                });
+            });
+            
+            versionButtons.appendChild(desktopButton);
+            versionButtons.appendChild(mobileButton);
+            versionButtons.appendChild(tabletButton);
+            
+            // Lägg till komponenter i lightbox
+            lightboxContent.appendChild(lightboxImage);
+            lightboxContent.appendChild(closeButton);
+            lightboxContent.appendChild(versionButtons);
+            lightbox.appendChild(lightboxContent);
+            
+            // Markera desktop-knappen som aktiv som standard
+            desktopButton.classList.add('active');
 
-            // Adicionar o lightbox ao container da galeria
+            // Lägg till lightbox i galleriet
             galleryContainer.appendChild(lightbox);
 
-            // Ajustar a imagem para caber na tela e centralizar o lightbox
-            const lightboxContent = lightbox.querySelector('.lightbox-content');
+            // Justera bilden för att passa skärmen och centrera lightbox
             lightboxContent.style.display = 'flex';
+            lightboxContent.style.flexDirection = 'column';
             lightboxContent.style.justifyContent = 'center';
             lightboxContent.style.alignItems = 'center';
             lightboxContent.style.height = '100vh';
             lightboxContent.style.width = '100%';
             lightboxContent.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
 
-            const lightboxImage = lightbox.querySelector('.lightbox-image');
             lightboxImage.style.maxWidth = '90%';
-            lightboxImage.style.maxHeight = '90%';
+            lightboxImage.style.maxHeight = '80%'; // Minska för att ge plats åt knappar
             lightboxImage.style.objectFit = 'contain';
+            
+            // Styla versionsknappar
+            versionButtons.style.display = 'flex';
+            versionButtons.style.justifyContent = 'center';
+            versionButtons.style.marginTop = '15px';
+            versionButtons.style.gap = '10px';
 
-            // Rolar automaticamente para o lightbox
+            // Rulla automatiskt till lightbox
             lightbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-            // Fechar o lightbox ao clicar fora da imagem
+            // Stäng lightbox vid klick utanför bilden
             lightbox.addEventListener('click', (event) => {
                 if (event.target === lightbox) {
                     galleryContainer.removeChild(lightbox);
                 }
             });
 
-            // Fechar o lightbox ao clicar no botão de fechar
-            const closeButton = lightbox.querySelector('.close-lightbox');
+            // Stäng lightbox vid klick på stängknappen
             closeButton.addEventListener('click', () => {
                 galleryContainer.removeChild(lightbox);
             });
+        });
+    });
+}
+
+// Hjälpfunktion för att skapa versionsväxlingsknappar
+function createVersionButton(label, clickHandler) {
+    const button = document.createElement('button');
+    button.className = 'version-button';
+    button.textContent = label;
+    button.style.padding = '8px 12px';
+    button.style.margin = '0 5px';
+    button.style.backgroundColor = '#333';
+    button.style.color = '#fff';
+    button.style.border = 'none';
+    button.style.borderRadius = '4px';
+    button.style.cursor = 'pointer';
+    button.style.transition = 'background-color 0.3s';
+    
+    button.addEventListener('mouseover', () => {
+        button.style.backgroundColor = '#555';
+    });
+    
+    button.addEventListener('mouseout', () => {
+        button.style.backgroundColor = '#333';
+    });
+    
+    button.addEventListener('click', clickHandler);
+    
+    return button;
+}
+
+// Funktion för att uppdatera lightbox med responsiva bilder
+function updateLightboxWithResponsiveImages(imageElement, defaultSrc, altText, mobileVersions, tabletVersions) {
+    imageElement.src = defaultSrc;
+    imageElement.alt = altText;
+    
+    // Preload mobil- och surfplattversioner för snabbare växling
+    const basePath = defaultSrc.substring(0, defaultSrc.lastIndexOf('/') + 1);
+    
+    // Skapa en hjälpfunktion för att kontrollera om en bild finns
+    const checkImage = function(urlToCheck, callback) {
+        const img = new Image();
+        img.onload = function() { 
+            callback(true, this.src); 
+        };
+        img.onerror = function() { 
+            callback(false, this.src); 
+        };
+        img.src = urlToCheck;
+    };
+    
+    // Försök förladda mobilversioner
+    mobileVersions.forEach(version => {
+        const imgUrl = basePath + 'assets/' + version;
+        checkImage(imgUrl, (exists) => {
+            if (exists) {
+                console.log('Förladdar mobil version: ' + imgUrl);
+            }
+        });
+    });
+    
+    // Försök förladda surfplattversioner
+    tabletVersions.forEach(version => {
+        const imgUrl = basePath + 'assets/' + version;
+        checkImage(imgUrl, (exists) => {
+            if (exists) {
+                console.log('Förladdar surfplatta version: ' + imgUrl);
+            }
         });
     });
 }
