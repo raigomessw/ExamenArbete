@@ -1,33 +1,33 @@
-/* 
- * ARQUIVO: home.css
- * DESCRIÇÃO: Folha de estilos principal para a aplicação web de tese.
- * AUTOR: Rai Gomes
- * VERSÃO: 2.0
- * DATA: 12 de maio de 2025
+/**
+ * FIL: home.css
+ * BESKRIVNING: Huvudstilmall för examensarbetets webbapplikation.
+ * FÖRFATTARE: Rai Gomes
+ * VERSION: 2.0
+ * DATUM: 12 maj 2025
  */
 
 /* =========================================
-   CONFIGURAÇÕES GLOBAIS E RESET
+   GLOBALA INSTÄLLNINGAR OCH ÅTERSTÄLLNING
    ========================================= */
 :root {
-  /* Variáveis de cores primárias */
+  /* Primära färgvariabler */
   --primary-color: #4a69bd;
   --primary-dark: #1e3799;
   --primary-light: #52a5fd;
-  --primary-rgb: 74, 105, 189; /* RGB para efeitos com transparência */
+  --primary-rgb: 74, 105, 189; /* RGB för effekter med transparens */
   
-  /* Variáveis de cores secundárias */
+  /* Sekundära färgvariabler */
   --secondary-color: #3395FF;
   --secondary-dark: #1f74d4;
-  --secondary-rgb: 51, 149, 255; /* RGB para efeitos com transparência */
+  --secondary-rgb: 51, 149, 255; /* RGB för effekter med transparens */
   
-  /* Variáveis de cores de destaque */
+  /* Accentfärgvariabler */
   --accent-color: #f53b57;
   --accent-dark: #d63146;
   --accent-light: #ff6b81;
-  --accent-rgb: 245, 59, 87; /* RGB para efeitos com transparência */
+  --accent-rgb: 245, 59, 87; /* RGB för effekter med transparens */
   
-  /* Variáveis de cores neutras */
+  /* Neutrala färgvariabler */
   --dark-text: #2c2c54;
   --light-text: #ffffff;
   --body-bg: #f4f4f9;
@@ -37,60 +37,60 @@
   --background-light: #f1f2f6;
   --text-color: #333333;
   --text-muted: #666666;
-  --text-rgb: 51, 51, 51; /* RGB para efeitos com transparência */
+  --text-rgb: 51, 51, 51; /* RGB för effekter med transparens */
   
-  /* Variáveis para o tema escuro */
+  /* Variabler för mörkt tema */
   --dark-body-bg: #121212;
   --dark-section-bg: #1e1e1e;
-  --dark-text-color: #f0f0f0; /* Texto mais claro para melhor contraste */
-  --dark-border-color: #555; /* Borda mais clara para melhor visibilidade */
+  --dark-text-color: #f0f0f0; /* Ljusare text för bättre kontrast */
+  --dark-border-color: #555; /* Ljusare kant för bättre synlighet */
   --dark-background: #18181865;
   --dark-background-light: #2a2a2a;
   --dark-heading-color: #ffffff;
   
-  /* Variáveis de feedback */
+  /* Feedback-variabler */
   --success-color: #2ecc71;
   --success-bg: rgba(39, 174, 96, 0.2);
   --error-color: #e74c3c;
   --error-bg: rgba(231, 76, 60, 0.2);
   
-  /* Variáveis de espaçamento */
+  /* Avstånd-variabler */
   --spacing-xs: 5px;
   --spacing-sm: 10px;
   --spacing-md: 20px;
   --spacing-lg: 30px;
   --spacing-xl: 40px;
   
-  /* Variáveis de fontes */
+  /* Typsnitt-variabler */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   --font-secondary: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif;
   --font-weight-normal: 400;
   --font-weight-bold: 700;
   
-  /* Variáveis de sombras */
+  /* Skugg-variabler */
   --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 6px 15px rgba(0, 0, 0, 0.2);
   
-  /* Variáveis de transição */
+  /* Övergångs-variabler */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
   
-  /* Variáveis de layout */
+  /* Layout-variabler */
   --max-width: 1200px;
   --border-radius-sm: 5px;
   --border-radius-md: 10px;
   --border-radius-lg: 15px;
   
-  /* Variáveis de z-index */
+  /* z-index-variabler */
   --z-back: -1;
   --z-normal: 1;
   --z-tooltip: 10;
   --z-fixed: 100;
   --z-modal: 1000;
 
-  /* Variáveis de cores em RGB para efeitos de transparência */
+  /* RGB-färgvariabler för transparenseffekter */
   --primary-rgb: 74, 105, 189;
   --primary-dark-rgb: 30, 55, 153;
   --primary-light-rgb: 82, 165, 253;
@@ -98,7 +98,7 @@
   --accent-rgb: 255, 126, 95;
 }
 
-/* Reset básico com box-sizing mais consistente */
+/* Grundläggande återställning med konsekvent box-sizing */
 *,
 *::before,
 *::after {
@@ -107,10 +107,10 @@
   padding: 0;
 }
 
-/* Suavizando deslocamentos de página para uma experiência mais fluida */
+/* Mjukare sidförflyttningar för en mer flytande upplevelse */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;  /* Compensação para o cabeçalho fixo */
+  scroll-padding-top: 80px;  /* Kompensation för fast huvud */
   height: 100%;
 }
 
@@ -122,12 +122,12 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden; /* Evita scrollbar horizontal em layouts responsivos */
-  -webkit-font-smoothing: antialiased; /* Melhora a renderização de fontes */
+  overflow-x: hidden; /* Förhindrar horisontell rullningslist i responsiva layouter */
+  -webkit-font-smoothing: antialiased; /* Förbättrar teckensnittåtergivning */
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Melhora a legibilidade e a consistência das fontes */
+/* Förbättrar läsbarhet och konsekvens för typsnitt */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-secondary);
   font-weight: var(--font-weight-bold);
@@ -142,11 +142,11 @@ h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
 
 p, li {
   margin-bottom: var(--spacing-md);
-  max-width: 70ch; /* Melhora legibilidade limitando largura do texto */
+  max-width: 70ch; /* Förbättrar läsbarhet genom att begränsa textbredden */
   line-height: 1.8;
 }
 
-/* Estilização de links para melhor feedback ao usuário */
+/* Länkstilar för bättre användarfeedback */
 a {
   color: var(--primary-color);
   text-decoration: none;
@@ -160,14 +160,14 @@ a:focus {
   text-decoration: underline;
 }
 
-/* Aumento de acessibilidade em foco */
+/* Förbättrad tillgänglighet vid fokus */
 :focus {
   outline: 3px solid var(--secondary-color);
   outline-offset: 2px;
 }
 
 /* =========================================
-   RECURSOS DE ACESSIBILIDADE
+   TILLGÄNGLIGHETSFUNKTIONER
    ========================================= */
 .skip-link {
   position: absolute;
@@ -199,7 +199,7 @@ a:focus {
 }
 
 /* =========================================
-   LAYOUT E NAVEGAÇÃO
+   LAYOUT OCH NAVIGATION
    ========================================= */
 header {
   background: var(--primary-color);
@@ -274,13 +274,13 @@ nav ul li a:hover {
 }
 
 main {
-  padding-top: 80px; /* Espaço para o header fixo */
+  padding-top: 80px; /* Utrymme för fast sidhuvud */
   flex: 1;
   width: 100%;
 }
 
 /* =========================================
-   ESTILOS DE SEÇÃO
+   SEKTIONSSTILAR
    ========================================= */
 section {
   padding: var(--spacing-xl) var(--spacing-md);
@@ -290,7 +290,7 @@ section {
   overflow: hidden;
 }
 
-/* Efeito sutil para alternar cores em seções */
+/* Subtil effekt för att växla färger i sektioner */
 section:nth-child(even) {
   background-color: var(--body-bg);
 }
@@ -303,10 +303,10 @@ section:nth-child(even) {
 }
 
 /* =========================================
-   COMPONENTES DE UI
+   UI-KOMPONENTER
    ========================================= */
 
-/* Cards de features com melhor acessibilidade */
+/* Funktionskort med bättre tillgänglighet */
 .features-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -345,7 +345,7 @@ section:nth-child(even) {
   transform: scale(1.2) rotate(5deg);
 }
 
-/* Botões com melhor acessibilidade e feedback visual */
+/* Knappar med bättre tillgänglighet och visuell återkoppling */
 .btn {
   background-color: var(--primary-color);
   color: var(--light-text);
@@ -386,7 +386,7 @@ section:nth-child(even) {
   transform: translateX(3px);
 }
 
-/* Formulário melhorado */
+/* Förbättrat formulär */
 .form-container {
   width: 100%;
   max-width: 600px;
@@ -494,7 +494,7 @@ textarea {
   opacity: 1;
 }
 
-/* Melhorias nas tabelas de dados */
+/* Förbättringar i datatabeller */
 .data-table-container {
   width: 100%;
   max-width: 900px;
@@ -612,7 +612,7 @@ textarea {
   border-bottom: none;
 }
 
-/* Otimização para gráficos */
+/* Optimering för diagram */
 .chart-container {
   margin: var(--spacing-xl) auto;
   max-width: 800px;
@@ -631,7 +631,7 @@ textarea {
   max-height: 360px !important;
 }
 
-/* Melhorando o loader */
+/* Förbättrar laddningsindikator */
 .loader {
   width: 50px;
   height: 50px;
@@ -650,7 +650,7 @@ textarea {
   100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Melhorias na visualização de imagens */
+/* Förbättringar i bildvisning */
 .image-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -673,12 +673,12 @@ textarea {
   box-shadow: var(--shadow-lg);
 }
 
-/* Removendo o posicionamento absoluto que causa problemas de layout */
+/* Tar bort absolut positionering som orsakar layoutproblem */
 #image2 {
   position: static;
 }
 
-/* Estilos para citações */
+/* Stilar för citat */
 blockquote {
   font-size: 1.1rem;
   font-style: italic;
@@ -704,7 +704,7 @@ blockquote::before {
   line-height: 1;
 }
 
-/* Melhorias no rodapé */
+/* Förbättringar i sidfoten */
 footer {
   background-color: var(--primary-dark);
   color: var(--light-text);
@@ -851,7 +851,7 @@ footer p {
   }
 }
 
-/* Botão Voltar ao Topo melhorado */
+/* Förbättrad tillbakaknapp */
 .top-btn {
   width: 45px;
   height: 45px;
@@ -887,17 +887,17 @@ footer p {
   box-shadow: var(--shadow-lg);
 }
 
-/* Estilos para o controle deslizante de Antes e Depois */
+/* Stilar för före/efter-reglage */
 .before-after-section {
   margin: var(--spacing-xl) 0;
 }
 
-/* Estilos para antes/depois foram movidos para components.css e atualizados */
+/* Stilar för före/efter har flyttats till components.css och uppdaterats */
 
-/* Estilos antigos do slider foram removidos pois agora usamos uma abordagem de imagens lado a lado */
+/* Gamla reglagestilar har tagits bort eftersom vi nu använder en sida-vid-sida-bildansats */
 
 /* =========================================
-   ANIMAÇÕES E TRANSIÇÕES
+   ANIMATIONER OCH ÖVERGÅNGAR
    ========================================= */
 .fade-in {
   opacity: 0;
@@ -919,7 +919,7 @@ footer p {
   transform: translateY(0);
 }
 
-/* Animação para os elementos que entram no viewport */
+/* Animation för element som kommer in i visningsområdet */
 .in-viewport .feature-box,
 .in-viewport .fade-in,
 .in-viewport .slide-in {
@@ -927,10 +927,10 @@ footer p {
 }
 
 /* =========================================
-   ACESSIBILIDADE AVANÇADA
+   AVANCERAD TILLGÄNGLIGHET
    ========================================= */
 
-/* Contraste alto */
+/* Hög kontrast */
 @media (prefers-contrast: high) {
   :root {
     --primary-color: #0056b3;
@@ -961,7 +961,7 @@ footer p {
   }
 }
 
-/* Redução de movimento para preferências do usuário */
+/* Minskad rörelse för användarpreferenser */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -982,10 +982,10 @@ footer p {
 }
 
 /* =========================================
-   RESPONSIVIDADE
+   RESPONSIVITET
    ========================================= */
 
-/* Dispositivos grandes (desktops) */
+/* Stora enheter (desktops) */
 @media screen and (min-width: 1200px) {
   .content {
     padding: 0;
@@ -1000,7 +1000,7 @@ footer p {
   }
 }
 
-/* Dispositivos médios (tablets) */
+/* Medelstora enheter (tablets) */
 @media screen and (max-width: 991px) {
   h1 { font-size: clamp(1.8rem, 3.5vw, 2.2rem); }
   h2 { font-size: clamp(1.5rem, 2.8vw, 1.8rem); }
@@ -1018,7 +1018,7 @@ footer p {
   }
 }
 
-/* Dispositivos pequenos (smartphones) */
+/* Små enheter (smartphones) */
 @media screen and (max-width: 768px) {
   header {
     padding: var(--spacing-sm);
@@ -1098,7 +1098,7 @@ footer p {
   }
 }
 
-/* Dispositivos muito pequenos */
+/* Mycket små enheter */
 @media screen and (max-width: 480px) {
   h1 { font-size: 1.5rem; }
   h2 { font-size: 1.3rem; }
@@ -1145,7 +1145,7 @@ footer p {
   }
 }
 
-/* Ajustes para o modal em dispositivos móveis */
+/* Justeringar för modal på mobila enheter */
 #galleryModal {
     position: fixed;
     top: 0;
@@ -1166,7 +1166,7 @@ footer p {
     border-radius: 8px;
 }
 
-/* Estilos específicos para dispositivos móveis */
+/* Specifika stilar för mobila enheter */
 @media (max-width: 768px) {
     #galleryModal {
         padding: 10px;

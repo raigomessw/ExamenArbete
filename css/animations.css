@@ -1,13 +1,13 @@
 /**
- * ARQUIVO: animations.css
- * DESCRIÇÃO: Animações e transições para melhorar a experiência do usuário
- * AUTOR: Rai Gomes
- * VERSÃO: 1.0
- * DATA: 12 de maio de 2025
+ * FIL: animations.css
+ * BESKRIVNING: Animationer och övergångar för att förbättra användarupplevelsen
+ * FÖRFATTARE: Rai Gomes
+ * VERSION: 1.0
+ * DATUM: 12 maj 2025
  */
 
 /* =========================================
-   ANIMAÇÕES GERAIS
+   ALLMÄNNA ANIMATIONER
    ========================================= */
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -93,7 +93,7 @@
 }
 
 /* =========================================
-   CLASSES DE ANIMAÇÃO
+   ANIMATIONSKLASSER
    ========================================= */
 .animate-on-scroll {
   opacity: 0;
@@ -163,7 +163,7 @@
 }
 
 /* =========================================
-   EFEITOS DE STAGGER
+   FÖRSKJUTNINGSEFFEKTER
    ========================================= */
 .stagger-container .stagger-item {
   opacity: 0;
@@ -176,7 +176,7 @@
   transform: translateY(0);
 }
 
-/* Atrasos para elementos em sequência */
+/* Fördröjningar för sekventiella element */
 .stagger-container .stagger-item:nth-child(1) { transition-delay: 0.1s; }
 .stagger-container .stagger-item:nth-child(2) { transition-delay: 0.2s; }
 .stagger-container .stagger-item:nth-child(3) { transition-delay: 0.3s; }
@@ -185,7 +185,7 @@
 .stagger-container .stagger-item:nth-child(6) { transition-delay: 0.6s; }
 
 /* =========================================
-   ANIMAÇÕES DE UI
+   UI-ANIMATIONER
    ========================================= */
 .pulse {
   animation: pulseLight 2s infinite;
@@ -201,7 +201,7 @@
 }
 
 /* =========================================
-   ANIMAÇÕES DO CARROSSEL
+   KARUSELLANIMATIONER
    ========================================= */
 
 @keyframes carouselFade {
@@ -243,7 +243,7 @@
   animation: carouselCaption 0.8s ease-out 0.5s both;
 }
 
-/* Animação para botões de navegação */
+/* Animation för navigeringsknappar */
 .carousel-button {
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
@@ -256,7 +256,7 @@
   transform: scale(0.95);
 }
 
-/* Animação para indicadores */
+/* Animation för indikatorer */
 .carousel-dot {
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
@@ -265,7 +265,7 @@
   transform: scale(1.3);
 }
 
-/* Respeita preferência por movimento reduzido */
+/* Respekterar inställningen för reducerad rörelse */
 @media (prefers-reduced-motion: reduce) {
   .carousel,
   .carousel-caption {
@@ -279,7 +279,7 @@
 }
 
 /* =========================================
-   PREFERÊNCIAS DE REDUÇÃO DE MOVIMENTO
+   INSTÄLLNINGAR FÖR REDUCERAD RÖRELSE
    ========================================= */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -305,7 +305,7 @@
 }
 
 /* =============================================
-   ANIMAÇÃO DO BOTÃO DE DOWNLOAD
+   ANIMATION FÖR NEDLADDNINGSKNAPP
    ============================================= */
 
 @keyframes downloadPulse {
@@ -350,7 +350,7 @@
   }
 }
 
-/* Animação de download simulada */
+/* Simulerad nedladdningsanimation */
 .download-icon-animate {
   display: inline-block;
   position: relative;
@@ -379,7 +379,7 @@
   animation: downloadArrow 1s infinite;
 }
 
-/* Respeita preferência por movimento reduzido */
+/* Respekterar inställningen för reducerad rörelse */
 @media (prefers-reduced-motion: reduce) {
   .download-btn {
     animation: none;

@@ -27,7 +27,7 @@
             
             // Permitir eventos de toque nos dispositivos móveis para o menu
             document.addEventListener('DOMContentLoaded', function() {
-                const menuToggle = document.querySelector('.ny-menu-toggle');
+                const menuToggle = document.querySelector('.menu-toggle');
                 if (menuToggle) {
                     menuToggle.addEventListener('touchend', function(e) {
                         e.preventDefault();
@@ -54,8 +54,10 @@
     <link rel="stylesheet" href="./css/animations.css">
     <link rel="stylesheet" href="./css/mobile-fix.css"><!-- Fix för visningsproblem på mobila enheter -->
     <link rel="stylesheet" href="./css/gallery-enhancements.css"><!-- Förbättringar för galleriet -->
+    <link rel="stylesheet" href="./css/lightbox.css"><!-- Avancerad bildvisare för galleriet -->
     <link rel="stylesheet" href="./css/header.css"><!-- Optimerad header med förbättrat stöd för teman -->
     <link rel="stylesheet" href="./css/theme-transition.css"><!-- Animationer för tema byten -->
+    <link rel="stylesheet" href="./css/mobile-menu-fix.css"><!-- Fix för mobil meny hamburger knapp -->
 </head>
 <body>
     <!-- Flytande navigering med framstegsindikator -->
@@ -114,7 +116,6 @@
                     <li class="nav-item"><a href="#resultat">Resultat</a></li>
                     <li class="nav-item"><a href="#kontakt">Kontakt</a></li>
                     <li class="nav-item"><a href="#dokument">Dokument</a></li>
-
                 </ul>
             </nav>
 
@@ -122,23 +123,24 @@
                 <button id="themeToggle" class="control-button" aria-label="Växla mörkt läge">
                     <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
-                <button class="menu-toggle control-button" aria-expanded="false" aria-label="Öppna meny">
-                    <span class="hamburger"></span>
-                </button>
+                <div class="mobile-menu-container">
+                    <button class="menu-toggle control-button" aria-expanded="false" aria-label="Öppna meny">
+                        <div class="hamburger">
+                            <span></span>
+                        </div>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div class="dropdown-menu">
+                        <ul class="nav-list">
+                            <li class="nav-item"><a href="#introduktion" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> Introduktion</a></li>
+                            <li class="nav-item"><a href="#resultat"><i class="fas fa-chart-bar" aria-hidden="true"></i> Resultat</a></li>
+                            <li class="nav-item"><a href="#kontakt"><i class="fas fa-envelope" aria-hidden="true"></i> Kontakt</a></li>
+                            <li class="nav-item"><a href="#dokument"><i class="fas fa-file-pdf" aria-hidden="true"></i> Dokument</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <!-- Mobil meny -->
-        <nav role="navigation" aria-label="Mobilmeny" class="mobile-nav">
-            <div class="mobile-nav-container">
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="#introduktion" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> Introduktion</a></li>
-                    <li class="nav-item"><a href="#resultat"><i class="fas fa-chart-bar" aria-hidden="true"></i> Resultat</a></li>
-                    <li class="nav-item"><a href="#kontakt"><i class="fas fa-envelope" aria-hidden="true"></i> Kontakt</a></li>
-                    <li class="nav-item"><a href="#dokument"><i class="fas fa-file-pdf" aria-hidden="true"></i> Dokument</a></li>
-                </ul>
-            </div>
-        </nav>
     </header>
 
     <main id="main-content">
@@ -175,14 +177,13 @@
                         </div>
                     </div>
 
-                    <h2>Designprocess</h2>
+                    <!-- Jämförelse Före och Efter -->
+                    <div class="before-after-section">
+                          <h2>Designprocess</h2>
                     <p>
                         Designprocessen för denna webbapplikation involverade flera steg, inklusive användarundersökningar, wireframing, prototyping och användartester. 
                         Målet var att skapa en responsiv och tillgänglig applikation som är lätt att navigera och förstå.
                     </p>
-                    
-                    <!-- Jämförelse Före och Efter -->
-                    <div class="before-after-section">
                         <h3>Före och efter designförändringen</h3>
                         <div class="comparison-container">
                             <div class="comparison-item">
@@ -644,7 +645,7 @@
                         <div class="caption">Home Page Tablet View</div>
                     </div>
                     <div class="gallery-item" tabindex="0">
-                        <img src="assets/AboutVyMobile..jpg" alt="About Mobile View" loading="lazy">
+                        <img src="assets/AboutVyMobile.jpg" alt="About Mobile View" loading="lazy">
                         <div class="caption">About Mobile View</div>
                     </div>
                     <div class="gallery-item" tabindex="0">
@@ -652,11 +653,11 @@
                         <div class="caption">About Tablet View</div>
                     </div>
                     <div class="gallery-item" tabindex="0">
-                        <img src="assets/AgencyVyMobile..jpg" alt="Agency Mobile View" loading="lazy">
+                        <img src="assets/AgencyVyMobile.jpg" alt="Agency Mobile View" loading="lazy">
                         <div class="caption">Agency Mobile View</div>
                     </div>
                     <div class="gallery-item" tabindex="0">
-                        <img src="assets/AgencyVyTablet..jpg" alt="Agency Tablet View" loading="lazy">
+                        <img src="assets/AgencyVyTablet.jpg" alt="Agency Tablet View" loading="lazy">
                         <div class="caption">Agency Tablet View</div>
                     </div>
                     <div class="gallery-item" tabindex="0">
@@ -668,7 +669,7 @@
                         <div class="caption">Application Tablet Mobile View</div>
                     </div>
                     <div class="gallery-item" tabindex="0">
-                        <img src="assets/BlogVyMobile..jpg" alt="Blog Mobile View" loading="lazy">
+                        <img src="assets/BlogVyMobile.jpg" alt="Blog Mobile View" loading="lazy">
                         <div class="caption">Blog Mobile View</div>
                     </div>
                     <div class="gallery-item" tabindex="0">
@@ -831,6 +832,8 @@
 
     <!-- Skript -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js" integrity="sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA=" crossorigin="anonymous"></script>
-    <script src="home.js"></script>
+
+  <script src="./js/home.js"></script>
+    <script src="./js/mobile-menu.js"></script>
 </body>
 </html>

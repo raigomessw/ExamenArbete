@@ -1,13 +1,13 @@
 /**
- * ARQUIVO: themes.css
- * DESCRIÇÃO: Estilos para tema claro e escuro
- * AUTOR: Rai Gomes
- * VERSÃO: 1.0
- * DATA: 12 de maio de 2025
+ * FIL: themes.css
+ * BESKRIVNING: Stilar för ljust och mörkt tema
+ * FÖRFATTARE: Rai Gomes
+ * VERSION: 1.0
+ * DATUM: 12 maj 2025
  */
 
 /* =========================================
-   TEMA ESCURO
+   MÖRKT TEMA
    ========================================= */
 :root.dark-theme,
 body.dark-theme {
@@ -22,19 +22,19 @@ body.dark-theme {
   background-color: var(--dark-body-bg);
 }
 
-/* Script para carregar o tema antes do DOM estar pronto e evitar flash */
+/* Script för att ladda temat innan DOM är klar och undvika blixt */
 :root {
   color-scheme: light dark;
 }
 
-/* Ajustes específicos do tema escuro */
+/* Specifika justeringar för mörkt tema */
 body.dark-theme header {
   background-color: #1a1a1a;
   border-bottom: 1px solid var(--dark-border-color);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Melhoria no contraste dos elementos em dark mode */
+/* Förbättrad kontrast på element i mörkt läge */
 @keyframes borderPulse {
   0% {
     border-color: #4a69bd;
@@ -94,7 +94,7 @@ body.dark-theme .accordion-header {
   background-color: #252525;
 }
 
-/* Estilos comuns para todos os cards sazonais no tema escuro */
+/* Gemensamma stilar för alla säsongskort i mörkt tema */
 body.dark-theme .season-card {
   transition: transform 0.35s ease-out, box-shadow 0.35s ease-out, border-color 0.35s ease;
 }
@@ -108,7 +108,7 @@ body.dark-theme .season-header {
   transition: background-color 0.3s ease;
 }
 
-/* Estilos comuns para ícones sazonais no tema escuro */
+/* Gemensamma stilar för säsongsikoner i mörkt tema */
 body.dark-theme .season-icon {
   font-size: 2.5em;
   margin-bottom: 15px;
@@ -229,7 +229,7 @@ body.dark-theme footer {
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Melhorias adicionais para o Dark Mode */
+/* Ytterligare förbättringar för mörkt läge */
 body.dark-theme a {
   color: #7aa3ff;
 }
@@ -311,7 +311,7 @@ body.dark-theme .tab-button.active {
   border-color: #4a69bd;
 }
 
-/* Melhorar botões de abas, incluindo "Bilder" no modo escuro */
+/* Förbättrade flikar, inklusive "Bilder" i mörkt läge */
 body.dark-theme .tabs-container {
   background-color: var(--dark-background);
   border: 1px solid var(--dark-border-color);
@@ -343,7 +343,7 @@ body.dark-theme .tab-content {
   border-top: 1px solid var(--dark-border-color);
 }
 
-/* Corrigir problema de contraste em links */
+/* Åtgärda kontrastproblem i länkar */
 body.dark-theme .footer-links a,
 body.dark-theme .contact-list a,
 body.dark-theme .nav-links a {
@@ -359,7 +359,7 @@ body.dark-theme .nav-links a:hover {
   text-decoration: underline;
 }
 
-/* Melhorar o carousel no modo escuro */
+/* Förbättra karusellen i mörkt läge */
 body.dark-theme .carousel-button {
   background-color: rgba(74, 105, 189, 0.8);
   color: white;
@@ -397,9 +397,9 @@ body.dark-theme .carousel-item img {
   border: 1px solid #333;
 }
 
-/* Corrigir navegação flutuante no modo escuro */
+/* Åtgärda flytande navigering i mörkt läge */
 body.dark-theme .floating-nav {
-  background-color: rgba(30, 30, 30, 0.8);
+  background-color:transparent;
 }
 
 body.dark-theme .floating-nav-dot {
@@ -414,7 +414,6 @@ body.dark-theme .floating-nav-item:hover .floating-nav-dot {
 }
 
 body.dark-theme .floating-nav-text {
-  background-color: #252525;
   color: #e0e0e0;
 }
 
@@ -422,7 +421,7 @@ body.dark-theme .progress-indicator {
   background-color: #4a69bd;
 }
 
-/* Melhorar timeline no modo escuro */
+/* Förbättra tidslinje i mörkt läge */
 body.dark-theme .timeline::before {
   background-color: #444;
 }
@@ -444,7 +443,7 @@ body.dark-theme .timeline-content {
   border-color: #444;
 }
 
-/* Melhorar formulário em modo escuro */
+/* Förbättra formulär i mörkt läge */
 body.dark-theme .form-container {
   background-color: #1e1e1e;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -506,7 +505,7 @@ body.dark-theme label {
   font-weight: 500;
 }
 
-/* Melhorar botões no modo escuro */
+/* Förbättra knappar i mörkt läge */
 body.dark-theme .btn {
   background-color: #4a69bd;
   color: white;
@@ -538,7 +537,7 @@ body.dark-theme .download-btn:hover {
   background-color: #5d7ece;
 }
 
-/* Melhorar ícones e decorações no modo escuro */
+/* Förbättra ikoner och dekorationer i mörkt läge */
 body.dark-theme .fas, 
 body.dark-theme .fab,
 body.dark-theme .far,
@@ -583,7 +582,7 @@ body.dark-theme .social-icon:hover {
   background-color: #5d7ece;
 }
 
-/* Melhorar cards de introdução no modo escuro */
+/* Förbättra introduktionskort i mörkt läge */
 body.dark-theme .intro-card {
   background-color: #2d3748;
   border: 1px solid #4a69bd;
@@ -635,13 +634,13 @@ body.dark-theme .intro-card a:hover {
   text-decoration: underline;
 }
 
-/* Melhorar os destaques em modo escuro */
+/* Förbättra markeringar i mörkt läge */
 body.dark-theme .highlight {
   background-color: rgba(74, 105, 189, 0.2);
   color: #ffffff;
 }
 
-/* Melhorar cabeçalhos em dark mode */
+/* Förbättra rubriker i mörkt läge */
 body.dark-theme .section-header {
   color: #ffffff;
   border-bottom-color: #4a69bd;
@@ -651,7 +650,7 @@ body.dark-theme .section-subheader {
   color: #e0e0e0;
 }
 
-/* Melhorar imagens de comparação antes/depois no modo escuro */
+/* Förbättra före/efter jämförelsebilder i mörkt läge */
 body.dark-theme .comparison-container {
   background-color: #181818;
   border: 1px solid #444;
@@ -671,7 +670,7 @@ body.dark-theme .comparison-label {
   border-radius: var(--border-radius-sm);
 }
 
-/* Melhorar textos e títulos no modo escuro para maior contraste */
+/* Förbättra texter och rubriker i mörkt läge för bättre kontrast */
 body.dark-theme h1 {
   color: #ffffff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -709,7 +708,7 @@ body.dark-theme .lead {
   font-weight: 500;
 }
 
-/* Melhorar listas no modo escuro */
+/* Förbättra listor i mörkt läge */
 body.dark-theme ul li, 
 body.dark-theme ol li {
   color: var(--dark-text-color);
@@ -720,7 +719,7 @@ body.dark-theme li::marker {
 }
 
 /* =========================================
-   BOTÃO DE TROCA DE TEMA 
+   KNAPP FÖR TEMABYTE 
    ========================================= */
 .header-controls {
   display: flex;
@@ -759,7 +758,7 @@ body.dark-theme .theme-toggle:focus {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Animação suave na transição entre temas */
+/* Mjuk animering vid temaövergång */
 body {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
@@ -769,7 +768,7 @@ input, textarea, select, button, a, .tabs-container, .tab-button {
   transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
 }
 
-/* Impedir flash de conteúdo no carregamento da página */
+/* Förhindra innehållsblixt vid sidladdning */
 html.transition,
 html.transition *,
 html.transition *:before,
@@ -778,7 +777,7 @@ html.transition *:after {
   transition-duration: 0ms !important;
 }
 
-/* Melhorar gráficos no modo escuro */
+/* Förbättra diagram i mörkt läge */
 body.dark-theme .chart-container {
   background-color: #1e1e1e;
   border: 1px solid #444;
@@ -787,18 +786,18 @@ body.dark-theme .chart-container {
   z-index: 1;
 }
 
-/* Garantir que a fonte dos textos dos gráficos seja visível */
+/* Säkerställ att diagramtexten är synlig */
 body.dark-theme .chartjs-render-monitor {
   color: var(--dark-text-color) !important;
 }
 
-/* Adicionar estilos para texto dentro do chart.js */
+/* Lägg till stilar för text inom chart.js */
 body.dark-theme .chart-container .chartjs-size-monitor,
 body.dark-theme .chart-container canvas {
   filter: brightness(1.1);
 }
 
-/* Melhorar legibilidade dos gráficos */
+/* Förbättra läsbarhet för diagram */
 body.dark-theme .chart-container::before {
   content: '';
   position: absolute;
@@ -811,7 +810,7 @@ body.dark-theme .chart-container::before {
   border-radius: var(--border-radius-md);
 }
 
-/* Estilizar tooltips de gráficos no modo escuro */
+/* Stila diagram-tooltips i mörkt läge */
 body.dark-theme .chartjs-tooltip {
   background-color: #252525 !important;
   border-color: #444 !important;
@@ -819,7 +818,7 @@ body.dark-theme .chartjs-tooltip {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4) !important;
 }
 
-/* Estilo para o container de recursos no tema escuro */
+/* Stil för funktionsbehållare i mörkt tema */
 body.dark-theme .features-container {
   display: grid;
   gap: var(--spacing-lg);
@@ -828,7 +827,7 @@ body.dark-theme .features-container {
   border-radius: var(--border-radius-lg);
 }
 
-/* Cores para as estações do ano - Tema escuro */
+/* Färger för årstider - Mörkt tema */
 body.dark-theme .season-spring {
   background: linear-gradient(315deg, #193731, #0d2622);
   border: 1px solid #4db6ac;
@@ -909,7 +908,7 @@ body.dark-theme .season-winter .stat-bar-fill {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
-/* Estilos para textos de estatísticas sazonais - Tema escuro */
+/* Stilar för säsongsstatistiktexter - Mörkt tema */
 body.dark-theme .season-spring .stat-label {
   color: #607d8b;
 }
@@ -942,7 +941,7 @@ body.dark-theme .season-winter .stat-value {
   color: #9fa8da;
 }
 
-/* Estilos para o container de tabela de dados responsiva - Tema escuro */
+/* Stilar för responsiv datatabellbehållare - Mörkt tema */
 body.dark-theme .data-table-container {
   background-color: #252525;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -957,7 +956,7 @@ body.dark-theme .data-table-container::-webkit-scrollbar-thumb {
   background-color: #4a69bd;
 }
 
-/* Estilos para a dica de rolagem da tabela no tema escuro */
+/* Stilar för tabellens rullningstips i mörkt tema */
 body.dark-theme .scroll-hint {
   color: #999;
 }

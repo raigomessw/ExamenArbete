@@ -1,11 +1,11 @@
-/* 
- * Arquivo: gallery-enhancements.css
- * Descrição: Melhorias para a galeria de imagens
- * Autor: Copilot
- * Data: 13 de maio de 2025
+/**
+ * FIL: gallery-enhancements.css
+ * BESKRIVNING: Förbättringar för bildgalleriet
+ * FÖRFATTARE: Copilot
+ * DATUM: 13 maj 2025
  */
 
-/* Melhorias para a galeria de imagens */
+/* Förbättringar för bildgalleriet */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -82,9 +82,9 @@
     opacity: 1;
 }
 
-/* Indicador visual de que é clicável */
+/* Visuell indikator att objektet är klickbart */
 .gallery-item::after {
-    content: '\f00e'; /* ícone de lupa do FontAwesome */
+    content: '\f00e'; /* förstoringsglas-ikon från FontAwesome */
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     position: absolute;
@@ -123,7 +123,7 @@
     opacity: 1;
 }
 
-/* Estilo aprimorado para o modal da galeria */
+/* Förbättrad stil för gallerimodal */
 .gallery-modal {
     display: none;
     position: fixed;
@@ -222,7 +222,7 @@
     transform: scale(1.2);
 }
 
-/* Ajustes para dispositivos móveis */
+/* Anpassningar för mobila enheter */
 @media screen and (max-width: 768px) {
     .gallery {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
