@@ -201,8 +201,6 @@ function initGallery() {
             
             const tabletVersions = [
                 `${imageBaseName}VyTablet.jpg`,
-                `${imageBaseName}VyTablet..jpg`,
-                `${imageBaseName}VyTablet.pg.jpg`, // För filer med .pg.jpg ändelse
                 `${imageBaseName} VyTablet.jpg` // För filer med mellanslag
             ];
 
