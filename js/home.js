@@ -283,82 +283,81 @@ function optimizeGalleryModalForMobile() {
 }
 
 // =======================================
-// NAVEGAÇÃO MÓVEL
+// NAVEGAÇÃO MÓVEL (DROPDOWN)
 // =======================================
 function initMobileMenu() {
     const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    const mobileMenuContainer = document.querySelector('.mobile-menu-container');
     const header = document.querySelector('header');
     
-    if (!menuToggle || !nav) return;
+    if (!menuToggle || !dropdownMenu) {
+        console.log('Menu dropdown ou botão não encontrados');
+        return;
+    }
+    
+    // Garantir que os elementos estejam visíveis em telas móveis
+    if (window.innerWidth <= 768) {
+        if (mobileMenuContainer) {
+            mobileMenuContainer.style.display = 'block';
+        }
+        
+        menuToggle.style.display = 'flex';
+        menuToggle.style.visibility = 'visible';
+        menuToggle.style.opacity = '1';
+    }
+    
+    // Verificar e corrigir o estado do menu ao carregar a página
+    if (menuToggle.getAttribute('aria-expanded') === 'true') {
+        dropdownMenu.classList.add('show');
+        menuToggle.classList.add('active');
+    } else {
+        dropdownMenu.classList.remove('show');
+        menuToggle.classList.remove('active');
+    }
     
     // Função para verificar se estamos em visualização móvel
     function isMobileView() {
         return window.innerWidth <= 768;
     }
     
-    // Gerenciar estado do menu
-    menuToggle.addEventListener('click', function() {
-        const isExpanded = nav.classList.contains('active');
+    // Gerenciar estado do menu dropdown
+    menuToggle.addEventListener('click', function(event) {
+        // Prevenir que o clique propague para o document
+        event.stopPropagation();
         
-        nav.classList.toggle('active');
-        menuToggle.setAttribute('aria-expanded', !isExpanded);
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
         
-        // Adicionar overlay para fechar ao clicar fora (apenas em mobile)
-        if (!isExpanded && isMobileView()) {
-            const overlay = document.createElement('div');
-            overlay.className = 'menu-overlay';
-            overlay.style.position = 'fixed';
-            overlay.style.top = '60px'; // Altura do header
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = 'calc(100vh - 60px)';
-            overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
-            overlay.style.zIndex = '999';
-            overlay.style.opacity = '0';
-            overlay.style.transition = 'opacity 0.3s ease';
-            document.body.appendChild(overlay);
-            
-            // Efeito de fade-in
-            setTimeout(() => {
-                overlay.style.opacity = '1';
-            }, 10);
-            
-            // Fechar menu ao clicar no overlay
-            overlay.addEventListener('click', () => {
-                closeMenu();
-                document.body.removeChild(overlay);
-            });
-        } else if (isExpanded) {
-            // Remover overlay ao fechar
-            const overlay = document.querySelector('.menu-overlay');
-            if (overlay) {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    if (overlay.parentNode) {
-                        overlay.parentNode.removeChild(overlay);
-                    }
-                }, 300);
-            }
+        // Se já estiver expandido, apenas feche o menu
+        if (isExpanded) {
+            console.log('Menu está aberto, fechando...');
+            closeMenu();
+            return;
         }
         
-        // Alterar o ícone do botão
-        const icon = menuToggle.querySelector('i');
-        if (icon) {
-            if (isExpanded) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            }
+        // Se chegou aqui, é para abrir o menu
+        console.log('Menu está fechado, abrindo...');
+        
+        // Alternar o estado do botão
+        menuToggle.setAttribute('aria-expanded', 'true');
+        
+        // Mostrar o dropdown
+        dropdownMenu.classList.add('show');
+        
+        // Animar o ícone hamburger
+        menuToggle.classList.add('active');
+        
+        // Garantir que o container do menu esteja visível
+        const mobileMenuContainer = document.querySelector('.mobile-menu-container');
+        if (mobileMenuContainer) {
+            mobileMenuContainer.style.display = 'block';
         }
         
         // Anunciar para leitores de tela
         const announcer = document.createElement('div');
         announcer.setAttribute('aria-live', 'polite');
         announcer.className = 'sr-only';
-        announcer.textContent = isExpanded ? 'Meny stängd' : 'Meny öppnad';
+        announcer.textContent = newState ? 'Meny öppnad' : 'Meny stängd';
         document.body.appendChild(announcer);
         
         setTimeout(() => {
@@ -368,31 +367,85 @@ function initMobileMenu() {
     
     // Função para fechar o menu
     function closeMenu() {
-        nav.classList.remove('active');
+        console.log('Fechando menu dropdown');
+        
+        // Remover classe show do dropdown
+        dropdownMenu.classList.remove('show');
+        
+        // Restaurar o estado do botão
         menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.classList.remove('active');
         
-        const icon = menuToggle.querySelector('i');
-        if (icon) {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+        // Garantir que as classes CSS estejam corretas
+        const hamburger = menuToggle.querySelector('.hamburger');
+        if (hamburger) {
+            hamburger.classList.remove('active');
         }
         
-        // Remover overlay se existir
-        const overlay = document.querySelector('.menu-overlay');
-        if (overlay) {
-            overlay.style.opacity = '0';
-            setTimeout(() => {
-                if (overlay.parentNode) {
-                    overlay.parentNode.removeChild(overlay);
-                }
-            }, 300);
-        }
+        // Anunciar para leitores de tela
+        const announcer = document.createElement('div');
+        announcer.setAttribute('aria-live', 'polite');
+        announcer.className = 'sr-only';
+        announcer.textContent = 'Meny stängd';
+        document.body.appendChild(announcer);
+        
+        setTimeout(() => {
+            document.body.removeChild(announcer);
+        }, 1000);
     }
     
     // Fechar menu ao clicar em links de navegação
-    const navLinks = nav.querySelectorAll('a');
+    const navLinks = dropdownMenu.querySelectorAll('a');
     navLinks.forEach(link => {
-        link.addEventListener('click', closeMenu);
+        link.addEventListener('click', function(e) {
+            // Fechar o menu
+            closeMenu();
+            
+            // Se o link for para um elemento na mesma página, fazemos scroll suave
+            if (link.getAttribute('href').startsWith('#')) {
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    e.preventDefault();
+                    
+                    // Verificar preferência por movimento reduzido
+                    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    const behavior = prefersReducedMotion ? 'auto' : 'smooth';
+                    
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({ behavior, block: 'start' });
+                    }, 100);
+                }
+            }
+        });
+    });
+    
+    // Adicionar evento de click diretamente ao elemento hamburger
+    const hamburgerElement = menuToggle.querySelector('.hamburger');
+    if (hamburgerElement) {
+        hamburgerElement.addEventListener('click', function(event) {
+            event.stopPropagation();
+            
+            // Se o menu estiver expandido, fecha
+            if (menuToggle.getAttribute('aria-expanded') === 'true') {
+                closeMenu();
+            } else {
+                // Alternar o estado do botão para abrir
+                menuToggle.setAttribute('aria-expanded', 'true');
+                menuToggle.classList.add('active');
+                dropdownMenu.classList.add('show');
+            }
+        });
+    }
+    
+    // Fechar o dropdown ao clicar em qualquer lugar fora do menu
+    document.addEventListener('click', function(event) {
+        if (dropdownMenu.classList.contains('show') && 
+            !dropdownMenu.contains(event.target) && 
+            !menuToggle.contains(event.target)) {
+            closeMenu();
+        }
     });
     
     // Tornar o header mais compacto ao rolar
@@ -422,9 +475,9 @@ function initMobileMenu() {
         lastScrollTop = scrollTop;
     });
     
-    // Fechar menu ao redimensionar a janela para desktop
+    // Fechar menu ao redimensionar a janela
     window.addEventListener('resize', () => {
-        if (!isMobileView()) {
+        if (dropdownMenu.classList.contains('show')) {
             closeMenu();
         }
     });
