@@ -1,16 +1,16 @@
 /**
- * ARQUIVO: components.css
- * DESCRIÇÃO: Estilos para componentes específicos da interface do usuário
- * AUTOR: Rai Gomes
- * VERSÃO: 2.0
- * DATA: 12 de maio de 2025
+ * FIL: components.css
+ * BESKRIVNING: Stilar för specifika användargränssnittskomponenter
+ * FÖRFATTARE: Rai Gomes
+ * VERSION: 2.0
+ * DATUM: 12 maj 2025
  */
 
 /* =========================================
-   NAVEGAÇÃO MOBILE
+   MOBILNAVIGERING
    ========================================= */
 @media screen and (max-width: 768px) {
-  /* Estilização para menu mobile */
+  /* Stilar för mobilmeny */
   nav {
     position: fixed;
     top: 0;
@@ -29,7 +29,7 @@
     height: 100vh;
     opacity: 1;
     pointer-events: all;
-    padding-top: 80px; /* Espaço para o cabeçalho */
+    padding-top: 80px; /* Utrymme för sidhuvud */
   }
 
   header {
@@ -55,7 +55,7 @@
 }
 
 /* =========================================
-   GALERIA DE IMAGENS
+   BILDGALLERI
    ========================================= */
 .gallery {
   display: grid;
@@ -123,7 +123,7 @@
   transform: translateY(0);
 }
 
-/* Modal da galeria */
+/* Gallerimodal */
 .gallery-modal {
   display: none;
   position: fixed;
@@ -216,7 +216,7 @@
 }
 
 /* =========================================
-   NOTIFICAÇÕES E ALERTS
+   AVISERINGAR OCH NOTISER
    ========================================= */
 .notification {
   position: fixed;
@@ -259,7 +259,7 @@
 }
 
 /* =========================================
-   TOOLTIPS
+   VERKTYGSTIPS
    ========================================= */
 [data-tooltip] {
   position: relative;
@@ -291,7 +291,7 @@
 }
 
 /* =========================================
-   LISTA DE VERIFICAÇÃO
+   CHECKLISTA
    ========================================= */
 .checklist {
   list-style: none;
@@ -320,7 +320,7 @@
 }
 
 /* =========================================
-   CHIPS E TAGS
+   CHIPS OCH TAGGAR
    ========================================= */
 .tags-container {
   display: flex;
@@ -345,7 +345,7 @@
 }
 
 /* =========================================
-   ACCORDION
+   DRAGSPEL
    ========================================= */
 .accordion {
   width: 100%;
@@ -408,7 +408,7 @@
 }
 
 /* =========================================
-   SISTEMA DE ABAS
+   FLIKSYSTEM
    ========================================= */
 .tabs {
   display: flex;
@@ -470,7 +470,7 @@
 }
 
 /* =========================================
-   GALERIA DE IMAGENS
+   BILDGALLERI
    ========================================= */
 .gallery {
   display: grid;
@@ -526,7 +526,7 @@
   transform: translateY(0);
 }
 
-/* Modal da Galeria */
+/* Gallerimodal */
 .gallery-modal {
   display: none;
   position: fixed;
@@ -595,7 +595,7 @@
   outline: none;
 }
 
-/* Indicadores da galeria */
+/* Galleriindikatorer */
 .modal-indicators {
   display: flex;
   justify-content: center;
@@ -635,10 +635,10 @@
 }
 
 /* =========================================
-   COMPONENTES ADICIONAIS DE UI
+   YTTERLIGARE UI-KOMPONENTER
    ========================================= */
 
-/* Progress bar */
+/* Förloppsindikator */
 .progress-container {
   width: 100%;
   height: 20px;
@@ -655,7 +655,7 @@
   transition: width 1s ease-in-out;
 }
 
-/* Timeline */
+/* Tidslinje */
 .timeline {
   position: relative;
   margin: var(--spacing-xl) 0;
@@ -721,7 +721,7 @@
   }
 }
 
-/* Cards adicionais */
+/* Ytterligare kort */
 .info-card {
   background-color: var(--background-light);
   border-radius: var(--border-radius);
@@ -779,7 +779,7 @@
   }
 }
 
-/* Passo a passo */
+/* Steg för steg */
 .steps {
   counter-reset: step;
   margin: var(--spacing-xl) 0;
@@ -809,7 +809,7 @@
 }
 
 /* =========================================
-   CARREGADOR DE PÁGINA
+   SIDLADDARE
    ========================================= */
 .page-loader {
     position: fixed;
@@ -894,7 +894,7 @@
     100% { transform: rotate(360deg); }
 }
 
-/* Tema escuro */
+/* Mörkt tema */
 body.dark-theme .page-loader {
     background-color: var(--dark-background);
 }
@@ -910,7 +910,7 @@ body.dark-theme .loader-content p {
 }
 
 /* =========================================
-   SEÇÃO SOBRE MIM
+   OM MIG-SEKTION
    ========================================= */
 .about-me-container {
   display: flex;
@@ -998,7 +998,7 @@ body.dark-theme .loader-content p {
   box-shadow: var(--shadow-sm);
 }
 
-/* Animação para as tags de habilidades */
+/* Animation för kompetenstaggar */
 .skill-tags.stagger-container .skill-tag {
   opacity: 0;
   transform: translateY(10px);
@@ -1015,7 +1015,7 @@ body.dark-theme .loader-content p {
 .skill-tags.stagger-container.in-viewport .skill-tag:nth-child(5) { animation-delay: 0.5s; }
 .skill-tags.stagger-container.in-viewport .skill-tag:nth-child(6) { animation-delay: 0.6s; }
 
-/* CTA container */
+/* CTA-behållare */
 .cta-container {
   display: flex;
   flex-wrap: wrap;
@@ -1029,7 +1029,7 @@ body.dark-theme .loader-content p {
   text-align: center;
 }
 
-/* Ajustes para o tema escuro */
+/* Justeringar för mörkt tema */
 body.dark-theme .skill-tag {
   background-color: rgba(74, 105, 189, 0.2);
   color: var(--primary-light);
@@ -1046,7 +1046,7 @@ body.dark-theme .btn-outline:focus {
 }
 
 /* =========================================
-   BARRAS DE PROGRESSO DE HABILIDADES
+   FÄRDIGHETSFÖRLOPPSINDIKATORER
    ========================================= */
 .skill-progress {
   margin-top: var(--spacing-lg);
@@ -1108,7 +1108,7 @@ body.dark-theme .progress-bar-bg {
 }
 
 /* =========================================
-   ANIMAÇÕES
+   ANIMATIONER
    ========================================= */
 @keyframes floatUp {
   0% { 
@@ -1165,7 +1165,7 @@ body.dark-theme .progress-bar-bg {
 .delay-4 { animation-delay: 0.8s; }
 .delay-5 { animation-delay: 1s; }
 
-/* Respeitar preferências de movimento reduzido */
+/* Respekterar inställningen för reducerad rörelse */
 @media (prefers-reduced-motion: reduce) {
   .animate-float,
   .animate-fade-scale,
@@ -1179,7 +1179,7 @@ body.dark-theme .progress-bar-bg {
 }
 
 /* =========================================
-   NAVEGAÇÃO FLUTUANTE COM INDICADOR DE PROGRESSO
+   FLYTANDE NAVIGERING MED FÖRLOPPSINDIKATÖR
    ========================================= */
 .floating-nav {
   position: fixed;
@@ -1206,6 +1206,8 @@ body.dark-theme .progress-bar-bg {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  background-color: transparent;
+  border-radius: 10px;
 }
 
 .floating-nav-item {
@@ -1249,14 +1251,14 @@ body.dark-theme .progress-bar-bg {
   background-color: var(--primary-color);
 }
 
-/* Ajustar para tablets e dispositivos móveis */
+/* Justera för surfplattor och mobila enheter */
 @media screen and (max-width: 992px) {
   .floating-nav {
     display: none;
   }
 }
 
-/* Tema escuro */
+/* Mörkt tema */
 body.dark-theme .floating-nav-dot {
   background-color: var(--dark-background-light);
   border-color: var(--primary-light);
@@ -1276,7 +1278,7 @@ body.dark-theme .floating-nav-text {
 }
 
 /* =========================================
-   BOTÃO CTA FLUTUANTE
+   FLYTANDE CTA-KNAPP
    ========================================= */
 .floating-cta {
   position: fixed;
@@ -1325,7 +1327,7 @@ body.dark-theme .floating-nav-text {
   }
 }
 
-/* Acessibilidade e responsividade */
+/* Tillgänglighet och responsivitet */
 @media (max-width: 768px) {
   .floating-cta {
     bottom: 20px;
@@ -1359,7 +1361,7 @@ body.dark-theme .floating-nav-text {
 }
 
 /* =========================================
-   COMPARAÇÃO ANTES E DEPOIS (NOVO ESTILO)
+   FÖRE OCH EFTER JÄMFÖRELSE (NY STIL)
    ========================================= */
 .comparison-container {
   display: flex;
@@ -1444,8 +1446,8 @@ body.dark-theme .floating-nav-text {
   opacity: 0;
 }
 
-/* Efeito de hover após removido */
-/* Efeito de foco após removido */
+/* Hover-effekt borttagen */
+/* Fokuseffekt borttagen */
 
 .comparison-caption {
   padding: var(--spacing-md);
@@ -1455,7 +1457,7 @@ body.dark-theme .floating-nav-text {
   color: var(--text-muted);
 }
 
-/* Estilos para interação aprimorada com as imagens de comparação */
+/* Stilar för förbättrad interaktion med jämförelsebilder */
 .comparison-image-container.active-focus {
   animation: highlightPulse 1s;
 }
@@ -1481,7 +1483,7 @@ body.dark-theme .floating-nav-text {
   }
 }
 
-/* Ajustes para tema escuro */
+/* Justeringar för mörkt tema */
 body.dark-theme .comparison-item h4 {
   background-color: var(--primary-dark);
 }
@@ -1494,7 +1496,7 @@ body.dark-theme .comparison-caption {
   color: var(--dark-text-muted);
 }
 
-/* Responsivo */
+/* Responsivitet */
 @media screen and (max-width: 767px) {
   .comparison-container {
     gap: var(--spacing-xl);
@@ -1506,7 +1508,7 @@ body.dark-theme .comparison-caption {
 }
 
 /* =========================================
-   CARROSSEL DE IMAGENS
+   BILDKARUSELL
    ========================================= */
 .carousel {
   position: relative;
@@ -1536,7 +1538,7 @@ body.dark-theme .comparison-caption {
   width: auto;
   max-width: 100%;
   height: auto;
-  max-height: 500px; /* Limitando altura para melhor visualização */
+  max-height: 500px; /* Begränsar höjd för bättre visning */
   object-fit: contain;
 }
 
@@ -1618,7 +1620,7 @@ body.dark-theme .comparison-caption {
   transform: scale(1.2);
 }
 
-/* Adaptações para acessibilidade e preferências de movimento reduzido */
+/* Anpassningar för tillgänglighet och inställning för reducerad rörelse */
 @media (prefers-reduced-motion: reduce) {
   .carousel-container {
     transition: none;
@@ -1626,7 +1628,7 @@ body.dark-theme .comparison-caption {
 }
 
 /* =========================================
-   VISUALIZAÇÃO SAZONAL
+   SÄSONGSVISUALISERING
    ========================================= */
 .seasons-visualization {
   display: grid;
@@ -1952,7 +1954,7 @@ body.dark-theme .comparison-caption {
   }
 }
 
-/* Cores para estações do ano - Tema claro */
+/* Färger för årstider - Ljust tema */
 .season-spring {
   background: linear-gradient(315deg, #e0f2f1, #b2dfdb);
   border-color: #4db6ac;
@@ -2029,7 +2031,7 @@ body.dark-theme .comparison-caption {
   background-color: #7986cb;
 }
 
-/* Efeitos hover para estações do ano - Tema claro */
+/* Hover-effekter för årstider - Ljust tema */
 .season-spring:hover {
   box-shadow: 0 8px 20px rgba(77, 182, 172, 0.3);
   border-color: #26a69a;
@@ -2087,7 +2089,7 @@ body.dark-theme .comparison-caption {
 }
 
 /* =========================================
-   ESTILOS PARA ERROS DE GRÁFICO
+   STILAR FÖR DIAGRAMFEL
    ========================================= */
 .chart-error {
   display: flex;
@@ -2131,7 +2133,7 @@ body.dark-theme .comparison-caption {
   background-color: #e67e22;
 }
 
-/* Estilo para o modo escuro */
+/* Stil för mörkt läge */
 body.dark-theme .chart-error {
   background-color: rgba(243, 156, 18, 0.15);
   border-color: #f39c12;

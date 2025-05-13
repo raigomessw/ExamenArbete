@@ -1,9 +1,9 @@
 /**
- * ARQUIVO: home.js
- * DESCRIÇÃO: Lógica JavaScript para a aplicação web do trabalho de tese
- * AUTOR: Rai Gomes
- * VERSÃO: 2.0
- * DATA: 12 de maio de 2025
+ * FIL: home.js
+ * BESKRIVNING: JavaScript-logik för examensarbetets webbapplikation
+ * FÖRFATTARE: Rai Gomes
+ * VERSION: 2.0
+ * DATUM: 12 maj 2025
  */
 
 // Correção imediata para garantir que seções importantes sejam visíveis em dispositivos móveis
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // =======================================
-// ACCORDION
+// DRAGSPEL
 // =======================================
 function initAccordion() {
     const accordionHeaders = document.querySelectorAll('.accordion-header');
@@ -101,24 +101,24 @@ function initAccordion() {
     
     accordionHeaders.forEach(header => {
         header.addEventListener('click', function() {
-            // Toggle active class no cabeçalho
+            // Växla active-klass på rubriken
             this.classList.toggle('active');
             
-            // Toggle active class no corpo
+            // Växla active-klass på innehållet
             const body = this.nextElementSibling;
             body.classList.toggle('active');
             
-            // Atualizar aria-expanded
+            // Uppdatera aria-expanded
             const isExpanded = this.classList.contains('active');
             this.setAttribute('aria-expanded', isExpanded);
             
-            // Rotação do ícone já está no CSS
+            // Ikonrotation är redan i CSS
         });
     });
 }
 
 // =======================================
-// SISTEMA DE ABAS
+// FLIKSYSTEM
 // =======================================
 function initTabs() {
     const tabButtons = document.querySelectorAll('.tab-button');
@@ -127,28 +127,28 @@ function initTabs() {
     
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Pegar todos os botões relacionados com o mesmo pai
+            // Hämta alla knappar med samma förälder
             const parentTabsContainer = this.closest('.tabs');
             const siblingsButtons = parentTabsContainer.querySelectorAll('.tab-button');
             
-            // Remover active de todas as abas
+            // Ta bort active från alla flikar
             siblingsButtons.forEach(btn => {
                 btn.classList.remove('active');
             });
             
-            // Adicionar active para a aba atual
+            // Lägg till active för aktuell flik
             this.classList.add('active');
             
-            // Pegar o identificador da aba
+            // Hämta flik-ID
             const tabId = this.getAttribute('data-tab');
             
-            // Esconder todos os conteúdos de abas
+            // Dölj alla flikinnehåll
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(content => {
                 content.classList.remove('active');
             });
             
-            // Mostrar o conteúdo da aba selecionada
+            // Visa innehållet för den valda fliken
             const targetTabContent = document.getElementById(tabId);
             if (targetTabContent) {
                 targetTabContent.classList.add('active');
@@ -169,7 +169,7 @@ function initTabs() {
 }
 
 // =======================================
-// GALERIA DE IMAGENS
+// BILDGALLERI
 // =======================================
 function initGallery() {
     const galleryItems = document.querySelectorAll('.gallery-item');
@@ -179,7 +179,7 @@ function initGallery() {
 
     galleryItems.forEach(item => {
         item.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevenir comportamento padrão do clique
+            event.preventDefault(); // Förhindra standardbeteende vid klick
 
             const img = item.querySelector('img');
             if (!img) return;
@@ -256,7 +256,7 @@ function initGallery() {
 }
 
 // =======================================
-// OTIMIZAÇÃO DO MODAL PARA MOBILE
+// OPTIMERING AV MODAL FÖR MOBIL
 // =======================================
 function optimizeGalleryModalForMobile() {
     const modal = document.getElementById('galleryModal');
@@ -264,7 +264,7 @@ function optimizeGalleryModalForMobile() {
 
     if (!modal || !modalImage) return;
 
-    // Adicionar classes específicas para mobile
+    // Lägg till mobilspecifika klasser
     function applyMobileStyles() {
         if (window.innerWidth <= 768) {
             modal.classList.add('mobile-optimized');
@@ -283,7 +283,7 @@ function optimizeGalleryModalForMobile() {
 }
 
 // =======================================
-// NAVEGAÇÃO MÓVEL (DROPDOWN)
+// MOBILNAVIGATION (DROPDOWN)
 // =======================================
 function initMobileMenu() {
     const menuToggle = document.querySelector('.menu-toggle');
@@ -292,11 +292,11 @@ function initMobileMenu() {
     const header = document.querySelector('header');
     
     if (!menuToggle || !dropdownMenu) {
-        console.log('Menu dropdown ou botão não encontrados');
+        console.log('Dropdown-meny eller knapp hittades inte');
         return;
     }
     
-    // Garantir que os elementos estejam visíveis em telas móveis
+    // Se till att elementen är synliga på mobilskärmar
     if (window.innerWidth <= 768) {
         if (mobileMenuContainer) {
             mobileMenuContainer.style.display = 'block';
@@ -307,7 +307,7 @@ function initMobileMenu() {
         menuToggle.style.opacity = '1';
     }
     
-    // Verificar e corrigir o estado do menu ao carregar a página
+    // Kontrollera och korrigera menytillståndet när sidan laddas
     if (menuToggle.getAttribute('aria-expanded') === 'true') {
         dropdownMenu.classList.add('show');
         menuToggle.classList.add('active');
@@ -316,27 +316,27 @@ function initMobileMenu() {
         menuToggle.classList.remove('active');
     }
     
-    // Função para verificar se estamos em visualização móvel
+    // Funktion för att kontrollera om vi är i mobilvy
     function isMobileView() {
         return window.innerWidth <= 768;
     }
     
-    // Gerenciar estado do menu dropdown
+    // Hantera tillstånd för dropdown-menyn
     menuToggle.addEventListener('click', function(event) {
         // Prevenir que o clique propague para o document
         event.stopPropagation();
         
         const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
         
-        // Se já estiver expandido, apenas feche o menu
+        // Om den redan är expanderad, stäng bara menyn
         if (isExpanded) {
-            console.log('Menu está aberto, fechando...');
+            console.log('Menyn är öppen, stänger...');
             closeMenu();
             return;
         }
         
-        // Se chegou aqui, é para abrir o menu
-        console.log('Menu está fechado, abrindo...');
+        // Om vi kommer hit är det för att öppna menyn
+        console.log('Menyn är stängd, öppnar...');
         
         // Alternar o estado do botão
         menuToggle.setAttribute('aria-expanded', 'true');
@@ -365,14 +365,14 @@ function initMobileMenu() {
         }, 1000);
     });
     
-    // Função para fechar o menu
+    // Funktion för att stänga menyn
     function closeMenu() {
-        console.log('Fechando menu dropdown');
+        console.log('Stänger dropdown-menyn');
         
-        // Remover classe show do dropdown
+        // Ta bort show-klassen från dropdown
         dropdownMenu.classList.remove('show');
         
-        // Restaurar o estado do botão
+        // Återställ knappens tillstånd
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.classList.remove('active');
         
@@ -484,19 +484,19 @@ function initMobileMenu() {
 }
 
 // =======================================
-// ANIMAÇÕES AO SCROLLAR
+// SCROLLANIMATIONER
 // =======================================
 function initAnimationObserver() {
-    // Usar IntersectionObserver para animações baseadas em visibilidade
+    // Använd IntersectionObserver för synlighetsbaserade animeringar
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('in-viewport');
                 
-                // Animar elementos filhos
+                // Animera barn-element
                 const elementsToAnimate = entry.target.querySelectorAll('.feature-box, .fade-in, .slide-in');
                 elementsToAnimate.forEach((element, index) => {
-                    // Respeitar preferências de redução de movimento
+                    // Respektera rörelsepreference
                     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                     
                     if (prefersReducedMotion) {
@@ -508,19 +508,16 @@ function initAnimationObserver() {
                     }
                 });
                 
-                // Não removemos a observação para garantir que a visibilidade seja mantida
-                // em dispositivos móveis quando a página é recarregada
-                // observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px' }); // Reduzido o threshold e removido o rootMargin negativo
+    }, { threshold: 0.1, rootMargin: '0px' }); 
     
-    // Garantir que a seção de introdução sempre tenha a classe in-viewport
+    // Se till att introduktionssektionen alltid har klassen in-viewport
     const introSection = document.getElementById('introduktion');
     if (introSection) {
         introSection.classList.add('in-viewport');
         
-        // Também garantir que os elementos internos sejam visíveis
+        // Se också till att interna element är synliga
         const introElements = introSection.querySelectorAll('.feature-box, .fade-in, .slide-in');
         introElements.forEach(element => {
             element.classList.add('visible');
@@ -534,17 +531,17 @@ function initAnimationObserver() {
 }
 
 // =======================================
-// TEMA ESCURO
+// MÖRKT TEMA
 // =======================================
 function initThemeToggle() {
-    console.log("Inicializando controlador de tema...");
+    console.log("Initierar temakontroller...");
     const themeToggle = document.getElementById('themeToggle');
     const footerThemeToggle = document.getElementById('footerThemeToggle');
     const themeToggles = [themeToggle, footerThemeToggle].filter(Boolean);
     
-    // Se não encontrou os botões, tenta criar um botão de fallback
+    // Om knapparna inte hittas, försök skapa en reservknapp
     if (!themeToggles.length) {
-        console.warn("Botões de tema não encontrados, criando botão de fallback");
+        console.warn("Temaknappar hittades inte, skapar en reservknapp");
         const fallbackToggle = document.createElement('button');
         fallbackToggle.id = 'themeToggle';
         fallbackToggle.className = 'theme-toggle';
@@ -572,12 +569,12 @@ function initThemeToggle() {
         document.body.classList.remove('dark-theme');
     }
     
-    console.log("Tema atual:", isDarkMode ? "escuro" : "claro");
+    console.log("Aktuellt tema:", isDarkMode ? "mörkt" : "ljust");
     
-    // Atualizar todos os ícones
+    // Uppdatera alla ikoner
     updateAllThemeIcons(isDarkMode);
     
-    // Adicionar event listeners a todos os botões de tema
+    // Lägg till händelselyssnare till alla temaknappar
     themeToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             console.log("Botão de tema clicado");
@@ -594,11 +591,11 @@ function initThemeToggle() {
             // Atualizar os gráficos quando o tema mudar
             refreshCharts();
             
-            console.log("Tema alterado para:", newDarkMode ? "escuro" : "claro");
+            console.log("Tema ändrat till:", newDarkMode ? "mörkt" : "ljust");
         });
     });
     
-    // Atualizar todos os ícones de tema
+    // Uppdatera alla temaikoner
     function updateAllThemeIcons(isDarkMode) {
         themeToggles.forEach(toggle => {
             const icon = toggle.querySelector('i');
@@ -618,9 +615,9 @@ function initThemeToggle() {
         });
     }
     
-    // Anunciar mudança de tema para leitores de tela
+    // Tillkännage temaförändring för skärmläsare
     function announceThemeChange(isDarkMode) {
-        // Atualizar a meta tag theme-color para corresponder ao tema atual
+        // Uppdatera meta-taggen theme-color för att matcha aktuellt tema
         const metaThemeColor = document.querySelector('meta[name="theme-color"]');
         if (metaThemeColor) {
             metaThemeColor.setAttribute('content', isDarkMode ? '#1c1c1e' : '#4a69bd');
@@ -653,15 +650,15 @@ function initThemeToggle() {
     });
 }
 
-// Função para atualizar os gráficos quando o tema mudar
+// Funktion för att uppdatera diagram när temat ändras
 function refreshCharts() {
-    // Verificar se o Chart.js está disponível
+    // Kontrollera om Chart.js är tillgängligt
     if (typeof Chart === 'undefined') {
-        console.error("Chart.js não está disponível para atualização dos gráficos");
+        console.error("Chart.js är inte tillgängligt för diagramuppdatering");
         return;
     }
     
-    console.log("Atualizando gráficos para o novo tema");
+    console.log("Uppdaterar diagram för det nya temat");
     
     try {
         // Remover mensagens de erro, se existirem
@@ -881,14 +878,14 @@ function initScrollAnimation() {
 }
 
 // =======================================
-// ROLAGEM SUAVE
+// MJUK RULLNING
 // =======================================
 function initSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
             
-            // Não fazer nada se for um link vazio
+            // Gör ingenting om det är en tom länk
             if (targetId === '#') return;
             
             const target = document.querySelector(targetId);
@@ -896,22 +893,22 @@ function initSmoothScrolling() {
             if (target) {
                 e.preventDefault();
                 
-                // Verificar preferências de redução de movimento
+                // Kontrollera inställningar för reducerad rörelse
                 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 
                 if (prefersReducedMotion) {
-                    // Rolagem instantânea para usuários que preferem movimento reduzido
+                    // Omedelbar rullning för användare som föredrar reducerad rörelse
                     target.scrollIntoView();
                 } else {
-                    // Rolagem suave para outros usuários
+                    // Mjuk rullning för andra användare
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
                 
-                // Focar no elemento alvo para melhor acessibilidade
+                // Fokusera på målelementet för bättre tillgänglighet
                 target.setAttribute('tabindex', '-1');
                 target.focus({ preventScroll: true });
                 
-                // Atualizar histórico de URL
+                // Uppdatera URL-historik
                 history.pushState(null, '', targetId);
             }
         });
@@ -919,14 +916,14 @@ function initSmoothScrolling() {
 }
 
 // =======================================
-// BOTÃO VOLTAR AO TOPO
+// TILLBAKA TILL TOPPEN-KNAPP
 // =======================================
 function initScrollToTop() {
     const scrollToTopBtn = document.getElementById('scrollToTop');
     
     if (!scrollToTopBtn) return;
     
-    // Mostrar o botão quando o usuário rolar para baixo
+    // Visa knappen när användaren rullar nedåt
     window.addEventListener('scroll', () => {
         if (window.pageYOffset > 300) {
             scrollToTopBtn.classList.add('show');
@@ -935,11 +932,11 @@ function initScrollToTop() {
         }
     });
     
-    // Voltar ao topo ao clicar no botão
+    // Gå tillbaka till toppen när användaren klickar på knappen
     scrollToTopBtn.addEventListener('click', (e) => {
         e.preventDefault();
         
-        // Verificar preferências de redução de movimento
+        // Kontrollera inställningar för reducerad rörelse
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         
         if (prefersReducedMotion) {
@@ -954,7 +951,7 @@ function initScrollToTop() {
 }
 
 // =======================================
-// FORMULÁRIO DE CONTATO
+// KONTAKTFORMULÄR
 // =======================================
 function initFormValidation() {
     const forms = document.querySelectorAll('form');
@@ -970,7 +967,7 @@ function initFormValidation() {
             }
         });
         
-        // Validação ao perder o foco
+        // Validering när fokus förloras
         const inputs = form.querySelectorAll('input, textarea, select');
         inputs.forEach(input => {
             input.addEventListener('blur', function() {
@@ -993,13 +990,13 @@ function initFormValidation() {
     }
     
     function validateInput(input) {
-        // Valor é requerido mas está vazio
+        // Värdet är obligatoriskt men tomt
         if (input.hasAttribute('required') && !input.value.trim()) {
             showError(input, 'Detta fält är obligatoriskt');
             return false;
         }
         
-        // Validação de email
+        // E-postvalidering
         if (input.type === 'email' && input.value.trim()) {
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailPattern.test(input.value)) {
@@ -1008,7 +1005,7 @@ function initFormValidation() {
             }
         }
         
-        // Validação de telefone
+        // Telefonvalidering
         if (input.type === 'tel' && input.value.trim()) {
             const phonePattern = /^[0-9\s\-\+\(\)]{8,20}$/;
             if (!phonePattern.test(input.value)) {
@@ -1017,26 +1014,26 @@ function initFormValidation() {
             }
         }
         
-        // Se chegou aqui, está tudo OK
+        // Om vi kom hit är allt OK
         clearError(input);
         return true;
     }
     
     function showError(input, message) {
-        // Limpar erro existente primeiro
+        // Rensa befintligt fel först
         clearError(input);
         
         input.classList.add('error');
         
-        // Criar elemento de erro
+        // Skapa felelement
         const errorMsg = document.createElement('div');
         errorMsg.className = 'error-message';
         errorMsg.textContent = message;
         
-        // Adicionar mensagem depois do input
+        // Lägg till meddelande efter input
         input.parentNode.insertBefore(errorMsg, input.nextSibling);
         
-        // Configurar aria attributes para acessibilidade
+        // Konfigurera aria-attribut för tillgänglighet
         input.setAttribute('aria-invalid', 'true');
         input.setAttribute('aria-describedby', `error-${input.name || input.id}`);
         errorMsg.id = `error-${input.name || input.id}`;
@@ -1046,7 +1043,7 @@ function initFormValidation() {
         input.classList.remove('error');
         input.setAttribute('aria-invalid', 'false');
         
-        // Remover mensagem de erro
+        // Ta bort felmeddelande
         const errorMsg = input.nextElementSibling;
         if (errorMsg && errorMsg.classList.contains('error-message')) {
             errorMsg.parentNode.removeChild(errorMsg);
@@ -1055,15 +1052,15 @@ function initFormValidation() {
 }
 
 // =======================================
-// GRÁFICOS E VISUALIZAÇÃO DE DADOS
+// DIAGRAM OCH DATAVISUALISERING
 // =======================================
 function initCharts() {
-    // Inicialização dos gráficos gerais
-    console.log('Inicializando gráficos e visualizações de dados');
+    // Initialisering av allmänna diagram
+    console.log('Initierar diagram och datavisualiseringar');
     
-    // Verificar se o Chart.js está disponível
+    // Kontrollera om Chart.js är tillgängligt
     if (typeof Chart === 'undefined') {
-        console.error('Chart.js não está carregado');
+        console.error('Chart.js är inte laddat');
         return;
     }
     
@@ -1077,7 +1074,7 @@ function initCharts() {
 
 // Configurações comuns para os gráficos (considerando modo escuro)
 function getChartConfig() {
-    // Verificar se estamos no modo escuro
+    // Verificar se estar no modo escuro
     const isDarkMode = document.body.classList.contains('dark-theme');
     
     return {
@@ -1459,21 +1456,21 @@ function initEnhancedComparison() {
 }
 
 // =======================================
-// CARROSSEL DE IMAGENS
+// BILDKARUSELL
 // =======================================
 function initCarousel() {
-    // Verificar se há carrosséis na página
+    // Kontrollera om det finns karuseller på sidan
     const carousels = document.querySelectorAll('.carousel');
     
-    // Se não houver carrosséis, encerrar a função
+    // Om det inte finns några karuseller, avsluta funktionen
     if (!carousels.length) {
-        console.log("Nenhum carrossel encontrado na página - Função encerrada");
+        console.log("Inga karuseller hittades på sidan - Funktionen avslutas");
         return;
     }
     
-    // Para cada carrossel encontrado (mesmo que tenha sido removido do DOM posteriormente)
+    // För varje karusell som hittats (även om den har tagits bort från DOM senare)
     carousels.forEach(carousel => {
-        // Verificação extra para garantir que o carrossel ainda existe no DOM
+        // Extra kontroll för att säkerställa att karusellen fortfarande existerar i DOM
         if (!document.body.contains(carousel)) {
             return;
         }
@@ -1489,13 +1486,13 @@ function initCarousel() {
         let currentIndex = 0;
         const totalItems = items.length;
         
-        // Configurar larguras iniciais
+        // Konfigurera initiala bredder
         container.style.width = `${totalItems * 100}%`;
         items.forEach(item => {
             item.style.width = `${100 / totalItems}%`;
         });
         
-        // Inicializar dots
+        // Initiera prickar
         if (dots.length) {
             dots[0].classList.add('active');
             dots.forEach((dot, index) => {
@@ -1503,9 +1500,9 @@ function initCarousel() {
                     goToSlide(index);
                 });
                 
-                // Acessibilidade com teclado
+                // Tangentbordstillgänglighet
                 dot.setAttribute('role', 'button');
-                dot.setAttribute('aria-label', `Vá para o slide ${index + 1}`);
+                dot.setAttribute('aria-label', `Gå till bild ${index + 1}`);
                 dot.tabIndex = 0;
                 
                 dot.addEventListener('keydown', e => {
@@ -1517,7 +1514,7 @@ function initCarousel() {
             });
         }
         
-        // Configurar botões de navegação
+        // Konfigurera navigeringsknappar
         if (prevButton) {
             prevButton.addEventListener('click', () => {
                 goToSlide(currentIndex - 1);
@@ -1530,7 +1527,7 @@ function initCarousel() {
             });
         }
         
-        // Adicionar swipe em dispositivos móveis
+        // Lägg till svep på mobila enheter
         let touchStartX = 0;
         let touchEndX = 0;
         
@@ -1544,20 +1541,20 @@ function initCarousel() {
         }, { passive: true });
         
         function handleSwipe() {
-            const swipeThreshold = 50; // pixels mínimos para considerar um swipe
+            const swipeThreshold = 50; // minsta antal pixlar för att räkna som ett svep
             
             if (touchEndX < touchStartX - swipeThreshold) {
-                // Swipe para a esquerda (próximo)
+                // Svep åt vänster (nästa)
                 goToSlide(currentIndex + 1);
             }
             
             if (touchEndX > touchStartX + swipeThreshold) {
-                // Swipe para a direita (anterior)
+                // Svep åt höger (föregående)
                 goToSlide(currentIndex - 1);
             }
         }
         
-        // Auto-rotação (opcional)
+        // Auto-rotation (valfritt)
         let autoRotate = carousel.hasAttribute('data-auto-rotate');
         let rotationInterval;
         const rotationDelay = parseInt(carousel.getAttribute('data-rotation-delay') || '5000', 10);
@@ -1565,7 +1562,7 @@ function initCarousel() {
         if (autoRotate) {
             startAutoRotation();
             
-            // Pausar ao passar o mouse ou ao focar
+            // Pausa vid hovring eller fokus
             carousel.addEventListener('mouseenter', stopAutoRotation);
             carousel.addEventListener('mouseleave', startAutoRotation);
             carousel.addEventListener('focusin', stopAutoRotation);
@@ -1573,7 +1570,7 @@ function initCarousel() {
         }
         
         function startAutoRotation() {
-            // Verificar se o usuário prefere movimento reduzido
+            // Kontrollera om användaren föredrar reducerad rörelse
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (prefersReducedMotion) return;
             
@@ -1586,9 +1583,9 @@ function initCarousel() {
             clearInterval(rotationInterval);
         }
         
-        // Função principal para navegar entre slides
+        // Huvudfunktion för att navigera mellan bilder
         function goToSlide(index) {
-            // Lidar com wraparound
+            // Hantera wraparound
             if (index < 0) {
                 index = totalItems - 1;
             } else if (index >= totalItems) {
@@ -1597,27 +1594,27 @@ function initCarousel() {
             
             currentIndex = index;
             
-            // Verificar preferências de movimento reduzido
+            // Kontrollera inställningar för reducerad rörelse
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             
-            // Aplicar transição suave ou instantânea conforme preferência
+            // Tillämpa mjuk eller omedelbar övergång enligt preferens
             if (prefersReducedMotion) {
                 container.style.transition = 'none';
             } else {
                 container.style.transition = 'transform 0.5s ease-in-out';
             }
             
-            // Mover o contêiner
+            // Flytta behållaren
             const translateValue = -index * (100 / totalItems);
             container.style.transform = `translateX(${translateValue}%)`;
             
-            // Atualizar dots
+            // Uppdatera prickarna
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === index);
                 dot.setAttribute('aria-current', i === index ? 'true' : 'false');
             });
             
-            // Anunciar para leitores de tela
+            // Meddela skärmläsare
             announceSlideChange(index + 1, totalItems);
         }
         
@@ -1626,7 +1623,7 @@ function initCarousel() {
             announcer.setAttribute('aria-live', 'polite');
             announcer.className = 'sr-only';
             
-            // Obter título do slide atual se disponível
+            // Hämta titel för aktuell bild om tillgänglig
             const currentSlide = items[currentIndex];
             const slideCaption = currentSlide.querySelector('.carousel-caption h3');
             const captionText = slideCaption ? slideCaption.textContent : '';
@@ -1642,20 +1639,20 @@ function initCarousel() {
 }
 
 // =======================================
-// ANIMAÇÃO DE BARRAS DE ESTATÍSTICAS
+// ANIMATION AV STATISTIKSTAPLAR
 // =======================================
 function animateStatBars() {
     const statBars = document.querySelectorAll('.stat-bar-fill');
     
-    // Verifica se o navegador suporta IntersectionObserver
+    // Kontrollerar om webbläsaren stödjer IntersectionObserver
     if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Adiciona classe para animar quando estiver visível
+                    // Lägger till klass för att animera när den är synlig
                     entry.target.classList.add('animate');
                     
-                    // Para de observar depois de animar
+                    // Sluta observera efter animering
                     observer.unobserve(entry.target);
                 }
             });
@@ -1665,22 +1662,22 @@ function animateStatBars() {
             threshold: 0.1
         });
         
-        // Observa cada barra
+        // Observera varje stapel
         statBars.forEach(bar => {
             observer.observe(bar);
         });
     } else {
-        // Fallback para navegadores antigos
+        // Reservlösning för äldre webbläsare
         statBars.forEach(bar => {
             bar.classList.add('animate');
         });
     }
     
-    // Re-aplicar se o tema mudar
+    // Återapplicera om temat ändras
     document.getElementById('themeToggle').addEventListener('click', function() {
-        // Pequeno atraso para permitir a transição do tema primeiro
+        // Kort fördröjning för att tillåta temaövergången först
         setTimeout(function() {
-            // Remove e re-adiciona as classes para reiniciar as animações
+            // Ta bort och lägg till klasserna igen för att starta om animationerna
             document.querySelectorAll('.stat-bar-fill').forEach(bar => {
                 bar.classList.remove('animate');
                 void bar.offsetWidth; // Força reflow
@@ -1691,48 +1688,48 @@ function animateStatBars() {
 }
 
 // =======================================
-// RESPONSIVIDADE DOS ELEMENTOS
+// RESPONSIVITET FÖR ELEMENT
 // =======================================
-// Função para gerenciar a responsividade dos elementos
+// Funktion för att hantera elementens responsivitet
 function handleResponsiveElements() {
-    // Ajusta a altura dos cartões de estações para que todos tenham a mesma altura
+    // Justerar höjden på säsongskorten så att alla har samma höjd
     const seasonCards = document.querySelectorAll('.season-card');
     
-    // Resetar alturas antes de recalcular
+    // Återställ höjder innan omberäkning
     seasonCards.forEach(card => {
         card.style.height = 'auto';
     });
     
-    // Só igualar alturas em telas maiores que 767px
+    // Bara jämna ut höjderna på skärmar större än 767px
     if (window.innerWidth > 767) {
         let maxHeight = 0;
         
-        // Encontrar a altura máxima
+        // Hitta maxhöjden
         seasonCards.forEach(card => {
             const cardHeight = card.offsetHeight;
             maxHeight = Math.max(maxHeight, cardHeight);
         });
         
-        // Aplicar altura máxima a todos os cartões
+        // Tillämpa maxhöjden på alla kort
         seasonCards.forEach(card => {
             card.style.height = `${maxHeight}px`;
         });
     }
     
-    // Verificar se estamos em dispositivo móvel
+    // Kontrollera om vi är på en mobil enhet
     if (window.innerWidth <= 767) {
-        // Forçar visibilidade para seções importantes em dispositivos móveis
+        // Tvinga synlighet för viktiga sektioner på mobila enheter
         const importantSections = ['introduktion'];
         importantSections.forEach(sectionId => {
             const section = document.getElementById(sectionId);
             if (section) {
-                // Garantir que a seção seja visível
+                // Se till att sektionen är synlig
                 section.classList.add('in-viewport');
                 section.style.opacity = '1';
                 section.style.visibility = 'visible';
                 section.style.display = 'block';
                 
-                // Garantir que os elementos internos também sejam visíveis
+                // Se till att interna element också är synliga
                 const elementsToShow = section.querySelectorAll('.feature-box, .fade-in, .slide-in');
                 elementsToShow.forEach(el => {
                     el.classList.add('visible');
@@ -1744,7 +1741,7 @@ function handleResponsiveElements() {
         });
     }
     
-    // Ajustar tabelas responsivas para dispositivos móveis
+    // Justera responsiva tabeller för mobila enheter
     const tables = document.querySelectorAll('.data-table-container');
     
     tables.forEach(table => {
@@ -1760,39 +1757,39 @@ function handleResponsiveElements() {
     });
 }
 
-// Executar quando a página carregar e quando for redimensionada
+// Köra när sidan laddas och när den ändrar storlek
 window.addEventListener('load', handleResponsiveElements);
 window.addEventListener('resize', handleResponsiveElements);
 
-// Certificar-se de que a seção de Introdução seja visível após a carga completa da página
+// Se till att introduktionssektionen är synlig efter att sidan har laddats helt
 window.addEventListener('load', function() {
-    // Pequeno atraso para garantir que o DOM foi completamente carregado
+    // Kort fördröjning för att säkerställa att DOM har laddats helt
     setTimeout(function() {
-        // Forçar visibilidade da seção de introdução
+        // Tvinga synlighet för introduktionssektionen
         const introSection = document.getElementById('introduktion');
         if (introSection) {
             introSection.classList.add('in-viewport');
             
-            // Elementos internos também visíveis
+            // Interna element också synliga
             const introElements = introSection.querySelectorAll('.feature-box, .fade-in, .slide-in');
             introElements.forEach(element => {
                 element.classList.add('visible');
             });
         }
         
-        // Aplicar novamente a responsividade
+        // Applicera responsivitet igen
         handleResponsiveElements();
     }, 500);
 });
 
-// Adicionar dica visual para tabelas scrolláveis em dispositivos móveis
+// Lägg till visuell ledtråd för scrollbara tabeller på mobila enheter
 function addScrollHint() {
     const tables = document.querySelectorAll('.data-table-container');
     
     tables.forEach(table => {
-        // Verificar se a tabela é scrollável horizontalmente
+        // Kontrollera om tabellen är horisontellt scrollbar
         if (table.scrollWidth > table.clientWidth) {
-            // Verificar se a dica já existe
+            // Kontrollera om tipset redan finns
             if (!table.querySelector('.scroll-hint')) {
                 const hint = document.createElement('div');
                 hint.className = 'scroll-hint';
@@ -1803,10 +1800,10 @@ function addScrollHint() {
                 hint.style.color = 'var(--text-muted)';
                 hint.style.marginBottom = '5px';
                 
-                // Inserir antes da tabela
+                // Infoga före tabellen
                 table.parentNode.insertBefore(hint, table);
                 
-                // Remover a dica após alguns segundos de scroll
+                // Ta bort tipset efter några sekunders rullning
                 table.addEventListener('scroll', function() {
                     setTimeout(() => {
                         hint.style.opacity = '0';
@@ -1822,11 +1819,11 @@ function addScrollHint() {
     });
 }
 
-// Executar após carregar a página
+// Köra efter att sidan har laddats
 window.addEventListener('load', addScrollHint);
 
 // =======================================
-// MENU HAMBURGUER
+// HAMBURGARMENY
 // =======================================
 document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.querySelector('.menu-toggle');
@@ -1842,7 +1839,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // =======================================
-// CARDS DE SEÇÃO
+// SEKTIONSKORT
 // =======================================
 function initSectionCards() {
     const sectionCards = document.querySelectorAll('.section-card');
@@ -1866,7 +1863,7 @@ function initSectionCards() {
 }
 
 // =======================================
-// AJUSTE DO LIGHTBOX INLINE PARA TAMANHO COMPLETO
+// JUSTERING AV INLINE LIGHTBOX FÖR FULLSTÄNDIG STORLEK
 // =======================================
 function initInlineLightbox() {
     const galleryItems = document.querySelectorAll('.gallery-item');
@@ -1952,11 +1949,11 @@ function initInlineLightbox() {
     });
 }
 
-// Substituir a inicialização do modal pela nova funcionalidade
+// Ersätta modal-initialiseringen med den nya funktionaliteten
 initInlineLightbox();
 
 /**
- * Inicializa as funções do novo header moderno
+ * Initierar funktionerna för det nya moderna sidhuvudet
  */
 function initializeNyHeader() {
     // Detectar scroll para mudar o header
@@ -2032,29 +2029,29 @@ function initializeNyHeader() {
         const mobileNav = document.querySelector('.ny-mobile-nav');
         
         if (menuToggle && mobileNav) {
-            console.log("Menu móvel inicializado");
+            console.log("Mobilmeny initialiserad");
             
-            // Inicialização imediata para garantir que o estado inicial está correto
+            // Omedelbar initialisering för att säkerställa att det initiala tillståndet är korrekt
             menuToggle.setAttribute('aria-expanded', 'false');
             mobileNav.classList.remove('show');
             
             menuToggle.addEventListener('click', function() {
-                console.log("Menu toggle clicado");
+                console.log("Menyväxlare klickad");
                 const isExpanded = this.getAttribute('aria-expanded') === 'true';
                 const newState = !isExpanded;
                 
-                // Atualiza atributos e classes
+                // Uppdatera attribut och klasser
                 this.setAttribute('aria-expanded', newState ? 'true' : 'false');
                 mobileNav.classList.toggle('show', newState);
                 document.body.classList.toggle('menu-open', newState);
                 
-                console.log("Estado do menu:", newState ? "aberto" : "fechado");
+                console.log("Menytillstånd:", newState ? "öppen" : "stängd");
                 
-                // Forçar um reflow para garantir que as transições funcionem
+                // Tvinga en omflödning för att säkerställa att övergångarna fungerar
                 void mobileNav.offsetWidth;
             });
             
-            // Adicionar fechamento ao clicar em links para melhor UX
+            // Lägg till stängning vid klick på länkar för bättre UX
             mobileNav.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     menuToggle.setAttribute('aria-expanded', 'false');
@@ -2063,7 +2060,7 @@ function initializeNyHeader() {
                 });
             });
         } else {
-            console.warn("Menu móvel não encontrado");
+            console.warn("Mobilmeny hittades inte");
         }
     }
 }

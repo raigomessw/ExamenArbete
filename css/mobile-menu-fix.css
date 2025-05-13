@@ -1,5 +1,5 @@
 /**
- * Fix específico para garantir que o menu hamburger apareça em dispositivos móveis
+ * Specifik fix för att säkerställa att hamburgermenyn visas på mobila enheter
  */
 
 @media (max-width: 768px) {
@@ -56,7 +56,7 @@
         bottom: 0;
     }
     
-    /* Garantindo que o X fique visível quando ativo */
+    /* Säkerställer att X är synligt när det är aktivt */
     .menu-toggle[aria-expanded="true"] .hamburger::before,
     .menu-toggle.active .hamburger::before {
         transform: rotate(45deg) translate(1px, -1px) !important;

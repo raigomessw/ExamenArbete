@@ -1,8 +1,11 @@
 /**
- * Estilos específicos para o cabeçalho e navegação móvel
+ * Specifika stilar för sidhuvud och mobilnavigering
+ * FÖRFATTARE: Rai Gomes
+ * VERSION: 2.0
+ * DATUM: 12 maj 2025
  */
 
-/* Estilos gerais para o cabeçalho */
+/* Allmänna stilar för sidhuvud */
 .header {
     background: linear-gradient(90deg, #2d3e99 0%, #3a53c5 100%);
     color: #fff;
@@ -33,7 +36,7 @@
     width: 100%;
 }
 
-/* Estilos para o logo */
+/* Stilar för logotypen */
 .logo-container {
     display: flex;
     justify-content: space-between;
@@ -58,7 +61,7 @@
     opacity: 0.8;
 }
 
-/* Navegação desktop */
+/* Skrivbordsnavigering */
 .desktop-nav {
     display: flex;
     position: relative;
@@ -88,7 +91,7 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Controles do cabeçalho (botões de tema e menu) */
+/* Sidhuvudkontroller (tema och menyknapp) */
 .header-controls {
     display: flex;
     align-items: center;
@@ -117,7 +120,7 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Estilo do botão de hambúrguer */
+/* Stil för hamburgerknapp */
 .hamburger {
     width: 24px;
     height: 20px;
@@ -126,7 +129,7 @@
     flex-direction: column;
     justify-content: space-between;
     margin: 0 auto;
-    pointer-events: all; /* Garantir que eventos de clique funcionem */
+    pointer-events: all; /* Säkerställer att klickhändelser fungerar */
 }
 
 .hamburger::before,
@@ -161,7 +164,7 @@
 }
 
 .hamburger span {
-    margin: auto 0; /* Centralizar a barra do meio */
+    margin: auto 0; /* Centrerar den mellersta stapeln */
 }
 
 .menu-toggle[aria-expanded="true"] .hamburger::before {
@@ -176,7 +179,7 @@
     transform: rotate(-45deg) translate(1px, 1px);
 }
 
-/* Estilo do botão hamburger quando ativo */
+/* Stil för hamburgerknapp när den är aktiv */
 .menu-toggle.active .hamburger::before {
     transform: rotate(45deg) translate(1px, -1px);
 }
@@ -189,14 +192,14 @@
     transform: rotate(-45deg) translate(1px, 1px);
 }
 
-/* Navegação móvel */
+/* Mobilnavigering */
 .mobile-nav {
     position: fixed;
     top: 60px;
     left: 0;
     right: 0;
     background-color: #2d3e99;
-    z-index: 1001; /* Aumentado para ficar acima do overlay */
+    z-index: 1001; /* Ökad för att vara över overlayen */
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     transform: translateY(-110%);
     opacity: 0;
@@ -280,7 +283,7 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Overlay para fechar o menu móvel */
+/* Overlay för att stänga mobilmenyn */
 .menu-overlay {
     position: fixed;
     top: 60px;
@@ -300,7 +303,7 @@
     visibility: visible;
 }
 
-/* Novo dropdown para menu móvel */
+/* Ny dropdown för mobilmeny */
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -357,7 +360,7 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Screen reader only */
+/* Endast för skärmläsare */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -370,7 +373,7 @@
     border-width: 0;
 }
 
-/* Media queries para responsividade */
+/* Media queries för responsivitet */
 @media (max-width: 768px) {
     .desktop-nav {
         display: none;
@@ -390,11 +393,11 @@
         padding: 0.75rem 1rem;
     }
     
-    /* Melhorias específicas para dispositivos móveis */
+    /* Specifika förbättringar för mobila enheter */
     .mobile-nav {
         max-height: calc(100vh - 60px);
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch; /* Para rolagem suave em iOS */
+        -webkit-overflow-scrolling: touch; /* För smidig scrollning på iOS */
     }
     
     .mobile-nav .nav-item {
@@ -406,7 +409,7 @@
         font-size: 1.1rem;
     }
     
-    /* Evitar quebras de layout em telas muito pequenas */
+    /* Undviker layoutproblem på mycket små skärmar */
     .logo-primary {
         font-size: 1rem;
     }
@@ -433,5 +436,5 @@
 .mobile-menu-container {
     position: relative;
     display: none;
-    z-index: 1002; /* Aumentado para garantir que fique acima de outros elementos */
+    z-index: 1002; /* Ökad för att säkerställa att den är ovanför andra element */
 }
