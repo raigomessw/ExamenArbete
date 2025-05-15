@@ -126,7 +126,16 @@ function initTabs() {
     if (!tabButtons.length) return;
     
     tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(event) {
+            // Kolla om det är Figma-länken (om ja, låt standardbeteendet fortsätta utan att aktivera fliken)
+            if (this.classList.contains('figma-link')) {
+                // Förhindra inte standardbeteendet för länken
+                return;
+            }
+            
+            // För vanliga flikar, förhindra standardbeteendet
+            event.preventDefault();
+            
             // Hämta alla knappar med samma förälder
             const parentTabsContainer = this.closest('.tabs');
             const siblingsButtons = parentTabsContainer.querySelectorAll('.tab-button');
