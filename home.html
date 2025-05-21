@@ -1,0 +1,844 @@
+<!-- 
+  BESKRIVNING: Huvudsidan för webbapplikationen för examensarbete
+  FÖRFATTARE: Rai Gomes
+  VERSION: 2.0
+  DATUM: 12 maj 2025                 
+-->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Examensarbete - En responsiv och interaktiv webbapplikation om användarupplevelse och tillgänglighet">
+    <meta name="theme-color" content="#4a69bd">
+    <title>Examensarbete - MakeUp Institute Stockholm</title>
+    
+    <!-- Skript för att ladda temat innan något annat -->
+    <script>
+        // Tillämpa mörkt tema omedelbart om det behövs (undviker blinkning)
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            if (savedTheme === 'dark' || (savedTheme === null && prefersDarkScheme.matches)) {
+                document.documentElement.classList.add('dark-theme');
+                document.body.classList.add('dark-theme');
+            }
+            
+            // Permitir eventos de toque nos dispositivos móveis para o menu
+            document.addEventListener('DOMContentLoaded', function() {
+                const menuToggle = document.querySelector('.menu-toggle');
+                if (menuToggle) {
+                    menuToggle.addEventListener('touchend', function(e) {
+                        e.preventDefault();
+                        this.click();
+                    });
+                }
+            });
+        })();
+    </script>
+    
+    <!-- Föranslutningar för att förbättra prestanda -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Typsnitt och stil -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Huvud-CSS och komponenter -->
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/utilities.css">
+    <link rel="stylesheet" href="./css/themes.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/mobile-fix.css"><!-- Fix för visningsproblem på mobila enheter -->
+    <link rel="stylesheet" href="./css/gallery-enhancements.css"><!-- Förbättringar för galleriet -->
+    <link rel="stylesheet" href="./css/lightbox.css"><!-- Avancerad bildvisare för galleriet -->
+    <link rel="stylesheet" href="./css/header.css"><!-- Optimerad header med förbättrat stöd för teman -->
+    <link rel="stylesheet" href="./css/theme-transition.css"><!-- Animationer för tema byten -->
+    <link rel="stylesheet" href="./css/mobile-menu-fix.css"><!-- Fix för mobil meny hamburger knapp -->
+</head>
+<body>
+    <!-- Flytande navigering med framstegsindikator -->
+    <div class="floating-nav" aria-hidden="true">
+        <div class="progress-indicator"></div>
+        <div class="floating-nav-content">
+            <a href="#introduktion" class="floating-nav-item active" data-section="introduktion">
+                <span class="floating-nav-text">Intro</span>
+                <span class="floating-nav-dot"></span>
+            </a>
+            <a href="#resultat" class="floating-nav-item" data-section="resultat">
+                <span class="floating-nav-text">Resultat</span>
+                <span class="floating-nav-dot"></span>
+            </a>
+            <a href="#kontakt" class="floating-nav-item" data-section="kontakt">
+                <span class="floating-nav-text">Kontakt</span>
+                <span class="floating-nav-dot"></span>
+            </a>
+            <a href="#dokument" class="floating-nav-item" data-section="dokument">
+                <span class="floating-nav-text">Dokument</span>
+                <span class="floating-nav-dot"></span>
+            </a>
+        </div>
+    </div>
+    
+
+    <!-- Sidladdningsindikator -->
+    <div id="pageLoader" class="page-loader">
+        <div class="loader-content">
+            <div class="logo-loader">
+                <span class="logo-letter">M</span>
+                <span class="logo-letter">I</span>
+                <span class="logo-letter">S</span>
+            </div>
+            <div class="spinner"></div>
+            <p>Laddar webbplatsen...</p>
+            <p class="loader-subtitle">MakeUp Institute Stockholm</p>
+        </div>
+    </div>
+
+    <!-- Länk för att hoppa över navigering -->
+    <a href="#main-content" class="skip-link">Hoppa till innehåll</a>
+    
+    <header role="banner" class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="#main-content" class="header-logo" aria-label="Gå till huvudinnehållet">
+                    <span class="logo-primary">RAI GOMES</span>
+                    <span class="logo-secondary">Examensarbete</span>
+                </a>
+            </div>
+            
+            <nav role="navigation" aria-label="Huvudmeny" class="desktop-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#introduktion" aria-current="page">Introduktion</a></li>
+                    <li class="nav-item"><a href="#resultat">Resultat</a></li>
+                    <li class="nav-item"><a href="#kontakt">Kontakt</a></li>
+                    <li class="nav-item"><a href="#dokument">Dokument</a></li>
+                    <li class="nav-item-portfolio-link"><a href="https://www.raigmsportfolio.com/" target="_blank" rel="noopener noreferrer" class="pulse-button"><i class="fas fa-globe" aria-hidden="true"></i> Portfolio</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-controls">
+                <button id="themeToggle" class="control-button" aria-label="Växla mörkt läge">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <div class="mobile-menu-container">
+                    <button class="menu-toggle control-button" aria-expanded="false" aria-label="Öppna meny">
+                        <div class="hamburger">
+                            <span></span>
+                        </div>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div class="dropdown-menu">
+                        <ul class="nav-list">
+                            <li class="nav-item"><a href="#introduktion" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> Introduktion</a></li>
+                            <li class="nav-item"><a href="#resultat"><i class="fas fa-chart-bar" aria-hidden="true"></i> Resultat</a></li>
+                            <li class="nav-item"><a href="#kontakt"><i class="fas fa-envelope" aria-hidden="true"></i> Kontakt</a></li>
+                            <li class="nav-item"><a href="#dokument"><i class="fas fa-file-pdf" aria-hidden="true"></i> Dokument</a></li>
+                            <li class="nav-item portfolio-link-mobile"><a href="https://www.raigmsportfolio.com/" target="_blank" rel="noopener noreferrer" class="pulse-button-mobile"><i class="fas fa-globe" aria-hidden="true"></i> Portfolio</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Introduktionssektion -->
+        <section id="introduktion">
+            <div class="content fade-in">
+                    <h1>Examensarbete</h1>
+                    <h2>Introduktion</h2>
+                    <p>
+                        Denna webbapplikation är en interaktiv presentation av mitt examensarbete, som fokuserar på att förbättra användarupplevelsen och tillgängligheten för MakeUp Institute Stockholms webbplats. 
+                        Applikationen syftar till att visualisera de viktigaste resultaten och rekommendationerna från arbetet på ett användarvänligt och engagerande sätt.
+                    </p>
+                    <p>
+                        Examensarbetet undersökte hur MakeUp Institute Stockholm effektivt kan implementera ett tillgänglighetsprogram för att säkerställa efterlevnad av lagkrav och förbättra användarupplevelsen för alla användare. 
+                        Genom att kombinera designprinciper, användartester och teknisk utveckling, presenterar denna applikation en praktisk tillämpning av dessa principer.
+                    </p>
+                    
+                    <!-- Cards de resurser -->
+                    <div class="features-container">
+                        <div class="feature-box slide-in">
+                            <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                            <h3>Responsiv Design</h3>
+                            <p>Applikationen är designad för att fungera optimalt på alla enheter, från mobiltelefoner till stationära datorer.</p>
+                        </div>
+                        <div class="feature-box slide-in">
+                            <i class="fas fa-universal-access" aria-hidden="true"></i>
+                            <h3>Tillgänglighet</h3>
+                            <p>Applikationen följer WCAG 2.1 riktlinjer för att säkerställa att den är tillgänglig för alla användare, inklusive de med funktionsnedsättningar.</p>
+                        </div>
+                        <div class="feature-box slide-in">
+                            <i class="fas fa-chart-line" aria-hidden="true"></i>
+                            <h3>Datavisualisering</h3>
+                            <p>Resultaten från examensarbetet presenteras i interaktiva diagram och visualiseringar för att underlätta förståelse och engagemang.</p>
+                        </div>
+                    </div>
+
+                    <!-- Jämförelse Före och Efter -->
+                    <div class="before-after-section">
+                          <h2>Designprocess</h2>
+                    <p>
+                        Designprocessen för denna webbapplikation involverade flera steg, inklusive användarundersökningar, wireframing, prototyping och användartester. 
+                        Målet var att skapa en responsiv och tillgänglig applikation som är lätt att navigera och förstå.
+                    </p>
+                        <h3>Före och efter designförändringen</h3>
+                        <div class="comparison-container">
+                            <div class="comparison-item">
+                                <h4>Före</h4>
+                                <div class="comparison-image-container" tabindex="0" aria-label="Visa originaldesign i större storlek">
+                                    <img src="./assets/innan.jpg" alt="Webbdesign före förändringen" class="comparison-image">
+                                </div>
+                                <p class="comparison-caption">Originaldesign med begränsad tillgänglighet</p>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>Efter</h4>
+                                <div class="comparison-image-container" tabindex="0" aria-label="Visa den förbättrade designen i större storlek">
+                                    <img src="./assets/Desktop Home Page.jpg" alt="Webbdesign efter förändringen" class="comparison-image">
+                                </div>
+                                <p class="comparison-caption">Förbättrad design med fokus på användarupplevelse</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resultatavsnitt -->
+        <section id="resultat">
+            <div class="content">
+                <h2>Forskningsresultat</h2>
+                <p>
+                    Denna sektion presenterar de viktigaste resultaten från undersökningen som genomfördes med användare av MakeUp Institute Stockholm. Syftet med undersökningen var att utvärdera användbarheten på den befintliga webbplatsen och identifiera förbättringsområden.
+                </p>
+
+                <!-- Navigeringsdiagram -->
+                <h3>Webbplatsnavigering</h3>
+                <p>
+                    Undersökningen visade att majoriteten av användarna (60%) anser att navigeringen på den befintliga webbplatsen är förvirrande. Många användare rapporterade svårigheter att hitta specifik information, såsom kursplaner och kontaktuppgifter.
+                </p>
+                <div class="chart-container" aria-label="Diagram över navigeringsresultat">
+                    <canvas id="navChart" class="chart"></canvas>
+                </div>
+                <p>
+                    Detta diagram visar fördelningen av svaren på frågan: "Hur lätt tycker du att det är att navigera på webbplatsen?".
+                </p>
+                <blockquote>
+                    "Det är väldigt svårt att hitta det jag letar efter. Menyn är för lång och informationen är dåligt organiserad." - Svar från en deltagare i undersökningen.
+                </blockquote>
+
+                <!-- Diagram för visuell design -->
+                <h3>Visuell Design</h3>
+                <p>
+                    När det gäller visuell design ansåg majoriteten av användarna (75%) att webbplatsen är föråldrad och oattraktiv. Dock ansåg majoriteten av användarna (80%) att den övergripande färgschemat var lämpligt.
+                </p>
+                <div class="chart-container" aria-label="Diagram över resultat för visuell design">
+                    <canvas id="designChart" class="chart"></canvas>
+                </div>
+
+                <!-- Datatabell -->
+                <h3>Detaljerad Datatabell</h3>
+                <p>Tabellen nedan presenterar de fullständiga resultaten från undersökningen.</p>
+                <div class="data-table-container">
+                    <table id="resultsTable" class="results-table" aria-label="Forskningsresultat i tabellformat">
+                        <caption class="visually-hidden">Detaljerade svar från undersökningen</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Fråga</th>
+                                <th scope="col">Svar 1</th>
+                                <th scope="col">Svar 2</th>
+                                <th scope="col">Svar 3</th>
+                                <th scope="col">Svar 4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Hur lätt tycker du att det är att navigera på webbplatsen?</th>
+                                <td>Mycket lätt (10%)</td>
+                                <td>Lätt (20%)</td>
+                                <td>Neutral (30%)</td>
+                                <td>Svårt (40%)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Vad tycker du om webbplatsens visuella design?</th>
+                                <td>Mycket attraktiv (5%)</td>
+                                <td>Attraktiv (15%)</td>
+                                <td>Neutral (20%)</td>
+                                <td>Mindre attraktiv (60%)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>
+                    För mer information om undersökningsmetodiken och de fullständiga resultaten, se <a href="#" aria-label="Ladda ner den fullständiga forskningsrapporten (öppnar i ny flik)" target="_blank">den fullständiga forskningsrapporten</a>.
+                </p>
+                
+                <!-- FAQ med dragspel -->
+                <h3 class="mt-xl">Vanliga frågor om undersökningen</h3>
+                <div class="accordion" id="resultFaq">
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="faqHeading1">
+                            <h4>Hur genomfördes undersökningen?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p>Undersökningen genomfördes genom en kombination av online-enkäter och intervjuer med 11 användare av MakeUp Institute Stockholms webbplats. Deltagarna var både befintliga studenter, potentiella studenter och branschproffs.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="faqHeading2">
+                            <h4>Vilka var de största problemen som identifierades?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p>De största problemen som identifierades var:</p>
+                            <ul class="checklist">
+                                <li>Svår navigation och dålig struktur</li>
+                                <li>Föråldrad design som inte representerar varumärket</li>
+                                <li>Dålig läsbarhet och kontrast</li>
+                                <li>Avsaknad av responsiv design för mobila enheter</li>
+                                <li>Bristande tillgänglighet för användare med funktionsnedsättningar</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="faqHeading3">
+                            <h4>Hur påverkar dessa problem användarna?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p>Dessa problem påverkar användarna på flera sätt:</p>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Initial påverkan</div>
+                                    <div class="timeline-content">
+                                        <p>Användarna har svårt att hitta information om kurser och anmälningar, vilket leder till frustration och högre avhoppsfrekvens från webbplatsen.</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Långtidseffekter</div>
+                                    <div class="timeline-content">
+                                        <p>Webbplatsens problem leder till minskad konvertering, färre ansökningar och ett negativt intryck av institutets professionalism och kvalitet.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Visualisering säsongsfördelning -->
+                <h3>Säsongsfördelning av kurser och intresse</h3>
+                <p>
+                    Analysen visar att det finns en tydlig säsongsvariation i intresset för sminkutbildningar. De mest populära säsongerna för kurserna är våren och hösten, medan sommarkurserna har högst kundnöjdhet.
+                </p>
+                
+                <div class="seasons-visualization">
+                    <!-- Vår -->
+                    <div class="season-card season-spring animate-on-scroll fade-in">
+                        <div class="season-header">
+                            <span>Vår</span>
+                        </div>
+                        <div class="season-content">
+                            <i class="fas fa-seedling season-icon" aria-hidden="true"></i>
+                            <div class="season-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Kursdeltagare&nbsp;</span>
+                                    <span class="stat-value">85%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 85%"></div>
+                                </div>
+                                
+                                <div class="stat-item">
+                                    <span class="stat-label">Kundnöjdhet&nbsp;</span>
+                                    <span class="stat-value">78%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 78%"></div>
+                                </div>
+                                
+                                <div class="stat-item">
+                                    <span class="stat-label">Webbplatsbesök&nbsp;</span>
+                                    <span class="stat-value">92%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sommar -->
+                    <div class="season-card season-summer animate-on-scroll fade-in" data-delay="100">
+                        <div class="season-header">
+                            <span>Sommar</span>
+                        </div>
+                        <div class="season-content">
+                            <i class="fas fa-sun season-icon" aria-hidden="true"></i>
+                            <div class="season-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Kursdeltagare&nbsp;</span>
+                                    <span class="stat-value">65%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 65%"></div>
+                                </div>
+                                
+                                <div class="stat-item">
+                                    <span class="stat-label">Kundnöjdhet&nbsp;</span>
+                                    <span class="stat-value">92%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 92%"></div>
+                                </div>
+                                
+                                <div class="stat-item">
+                                    <span class="stat-label">Webbplatsbesök&nbsp;</span>
+                                    <span class="stat-value">58%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 58%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Höst -->
+                    <div class="season-card season-autumn animate-on-scroll fade-in" data-delay="200">
+                        <div class="season-header">
+                            <span>Höst</span>
+                        </div>
+                        <div class="season-content">
+                            <i class="fas fa-leaf season-icon" aria-hidden="true"></i>
+                            <div class="season-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Kursdeltagare&nbsp;</span>
+                                    <span class="stat-value">89%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 89%"></div>
+                                </div>
+                                
+                                <div class="stat-item">
+                                    <span class="stat-label">Kundnöjdhet&nbsp;</span>
+                                    <span class="stat-value">85%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 85%"></div>
+                                </div>
+                                
+                                <div class="stat-item">
+                                    <span class="stat-label">Webbplatsbesök&nbsp;</span>
+                                    <span class="stat-value">95%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Vinter -->
+                    <div class="season-card season-winter animate-on-scroll fade-in" data-delay="300">
+                        <div class="season-header">
+                            <span>Vinter</span>
+                        </div>
+                        <div class="season-content">
+                            <i class="fas fa-snowflake season-icon" aria-hidden="true"></i>
+                            <div class="season-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Kursdeltagare&nbsp;</span>
+                                    <span class="stat-value">45%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 45%"></div>
+                                </div>
+                                
+                                <div class="stat-item">
+                                    <span class="stat-label">Kundnöjdhet&nbsp;</span>
+                                    <span class="stat-value">80%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 80%"></div>
+                                </div>
+                                
+                                <div class="stat-item">
+                                    <span class="stat-label">Webbplatsbesök&nbsp;</span>
+                                    <span class="stat-value">72%</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-bar-fill" style="--fill-width: 72%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p>
+                    Denna visualisering visar att marknadsföringsinsatserna bör fokuseras på våren och hösten när intresset är som störst, medan vinterperioden kan kräva särskilda kampanjer för att öka engagemang och deltagande.
+                </p>
+            </div>
+        </section>
+
+        <!-- Kontaktsektion -->
+        <section id="kontakt">
+            <div class="content">
+                <h2>Kontakt</h2>
+                <p>Har du frågor om mitt examensarbete? Fyll i formuläret nedan så kontaktar jag dig.</p>
+                
+                <!-- Kontaktformulär -->
+                <div class="form-container">
+                    <form id="contactForm" aria-labelledby="formHeading">
+                        <h3 id="formHeading" class="visually-hidden">Kontaktformulär</h3>
+                        
+                        <div class="form-group">
+                            <label for="name">Namn:</label>
+                            <input type="text" id="name" name="name" required aria-required="true">
+                            <span id="nameError" class="error-message" role="alert"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">E-post:</label>
+                            <input type="email" id="email" name="email" required aria-required="true">
+                            <span id="emailError" class="error-message" role="alert"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Meddelande:</label>
+                            <textarea id="message" name="message" rows="4" required aria-required="true"></textarea>
+                            <span id="messageError" class="error-message" role="alert"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="submit-btn btn">
+                                <span class="btn-text">Skicka</span>
+                                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        
+                        <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+                    </form>
+                </div>
+                
+                <!-- Alternativ kontaktinformation -->
+                <div class="contact-info">
+                    <h3>Andra sätt att nå mig</h3>
+                    <ul class="contact-list">
+                        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:raigomessw@mail.com">raigomessw@mail.com</a></li>
+                        <li><i class="fab fa-linkedin" aria-hidden="true"></i> <a href="https://www.linkedin.com/in/rai-gomes-6487b2153/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><i class="fab fa-github" aria-hidden="true"></i> <a href="https://github.com/raigomessw" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dokumentsektion -->
+<section id="dokument">
+    <div class="content">
+        <h2>Dokument och Bilder</h2>
+        <p>Här kan du ladda ner och visa PDF-dokument relaterade till examensarbetet, samt se bilder från MakeUp Institute Stockholm.</p>
+        
+        <!-- Flikar för att växla mellan dokument och galleri -->
+        <div class="tabs mt-lg">
+            <button class="tab-button active" data-tab="documents">
+                <i class="fas fa-file-pdf" aria-hidden="true"></i> Dokument
+            </button>
+            <button class="tab-button" data-tab="gallery">
+                <i class="fas fa-images" aria-hidden="true"></i> Bilder
+            </button>
+             <a href="https://www.figma.com/design/eC3uqLekLmluz2sRM4z91m/Makeup-Institutet-Stockholm-%C3%96versikt?node-id=0-1&t=gm8JYYXY31YWtszq-1" target="_blank" rel="noopener noreferrer" class="tab-button figma-link" aria-label="Portfolio webbplats på Figma">
+                <i class="fas fa-globe" aria-hidden="true"></i> Figma Link
+            </a>
+        </div>
+        
+        <!-- Dokumentflikens innehåll -->
+        <div class="tab-content active" id="documents">
+            <div class="pdf-container">
+                <div class="info-card mb-lg">
+                    <div class="info-card-content">
+                        <h3>Examensarbete PDF</h3>
+                        <p>Detta dokument innehåller hela examensarbetet med analyser, resultat och slutsatser.</p>
+                        <ul class="checklist mb-md">
+                            <li>Fullständig analys av användarupplevelse</li>
+                            <li>Tillgänglighetsutvärdering</li>
+                            <li>Designrekommendationer</li>
+                        </ul>
+                        <a href="/assets/ExamenPDF/RaiGomesExamenarbete.pdf" download class="btn btn-accent download-btn">
+                            <span class="download-icon-animate"><i class="fas fa-download" aria-hidden="true"></i></span> Ladda ner PDF
+                        </a>
+                    </div>
+                </div>
+                <iframe src="/assets/ExamenPDF/RaiGomesExamenarbete.pdf" width="100%" height="600px" title="PDF-visning av examensarbetet" loading="lazy"></iframe>
+            </div>
+        </div>
+        
+        <!-- Galleri-flikens innehåll -->
+        <div class="tab-content" id="gallery">
+            <div class="gallery-container">
+                <div class="gallery">
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Desktop Home Page.jpg" alt="Hemsida efter designförändring" loading="lazy">
+                        <div class="caption">Hemsida efter designförändring</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/innan.jpg" alt="Hemsida före designförändring" loading="lazy">
+                        <div class="caption">Hemsida före designförändring</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Curses Desktop .jpg" alt="Kursersida efter omdesign" loading="lazy">
+                        <div class="caption">Kursersida efter omdesign</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Curses mer Information.jpg" alt="Detaljerad kursinformation" loading="lazy">
+                        <div class="caption">Detaljerad kursinformation</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Makeup institutet resultat enkät.png" alt="Resultat från undersökningen" loading="lazy">
+                        <div class="caption">Resultat från undersökningen</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/About.jpg" alt="Om MakeUp Institute Stockholm" loading="lazy">
+                        <div class="caption">Om MakeUp Institute Stockholm</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Agency.jpg" alt="Agentursida" loading="lazy">
+                        <div class="caption">Agentursida</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Application.jpg" alt="Ansökningssida" loading="lazy">
+                        <div class="caption">Ansökningssida</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Faq.jpg" alt="Vanliga frågor" loading="lazy">
+                        <div class="caption">Vanliga frågor</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Gallery.jpg" alt="Galleri från utbildningar" loading="lazy">
+                        <div class="caption">Galleri från utbildningar</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/News.jpg" alt="Nyhetsida" loading="lazy">
+                        <div class="caption">Nyhetsida</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Offers.jpg" alt="Specialerbjudanden" loading="lazy">
+                        <div class="caption">Specialerbjudanden</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Salon item information.jpg" alt="Salonginformationssida" loading="lazy">
+                        <div class="caption">Salonginformationssida</div>
+                    </div>
+
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/GalleryVyMobile.jpg" alt="Gallery Mobile View" loading="lazy">
+                        <div class="caption">Gallery Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/GalleryVyTablet.jpg" alt="Gallery Tablet View" loading="lazy">
+                        <div class="caption">Gallery Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Home PageVyMobile.jpg" alt="Home Page Mobile View" loading="lazy">
+                        <div class="caption">Home Page Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Home PageVyTablet.jpg" alt="Home Page Tablet View" loading="lazy">
+                        <div class="caption">Home Page Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/AboutVyMobile.jpg" alt="About Mobile View" loading="lazy">
+                        <div class="caption">About Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/AboutVyTablet.jpg" alt="About Tablet View" loading="lazy">
+                        <div class="caption">About Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/AgencyVyMobile.jpg" alt="Agency Mobile View" loading="lazy">
+                        <div class="caption">Agency Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/AgencyVyTablet.jpg" alt="Agency Tablet View" loading="lazy">
+                        <div class="caption">Agency Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/ApplicationVyTablet.jpg" alt="Application Tablet View" loading="lazy">
+                        <div class="caption">Application Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/ApplicationVyTabletMobile.jpg" alt="Application Tablet Mobile View" loading="lazy">
+                        <div class="caption">Application Tablet Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/BlogVyMobile.jpg" alt="Blog Mobile View" loading="lazy">
+                        <div class="caption">Blog Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/BlogVyTablet.jpg" alt="Blog Tablet View" loading="lazy">
+                        <div class="caption">Blog Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Curses VyMobile.jpg" alt="Curses Mobile View" loading="lazy">
+                        <div class="caption">Curses Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Curses VyTablet.jpg" alt="Curses Tablet View" loading="lazy">
+                        <div class="caption">Curses Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Curses mer Information VyMobile.jpg" alt="Curses More Info Mobile View" loading="lazy">
+                        <div class="caption">Curses More Info Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Curses mer Information VyTablet.jpg" alt="Curses More Info Tablet View" loading="lazy">
+                        <div class="caption">Curses More Info Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/FaqVyMobile.jpg" alt="FAQ Mobile View" loading="lazy">
+                        <div class="caption">FAQ Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/FaqVyTablet.pg.jpg" alt="FAQ Tablet View" loading="lazy">
+                        <div class="caption">FAQ Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/GalleryVyTablet.jpg" alt="Gallery Tablet View" loading="lazy">
+                        <div class="caption">Gallery Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/NewsVyMobile.jpg" alt="News Mobile View" loading="lazy">
+                        <div class="caption">News Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/NewsVyTablet.jpg" alt="News Tablet View" loading="lazy">
+                        <div class="caption">News Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/OffersVyMobile.jpg" alt="Offers Mobile View" loading="lazy">
+                        <div class="caption">Offers Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/OffersVyTablet.jpg" alt="Offers Tablet View" loading="lazy">
+                        <div class="caption">Offers Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Salon item informationVyMobile.jpg" alt="Salon Item Info Mobile View" loading="lazy">
+                        <div class="caption">Salon Item Info Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Salon item informationVyTablet.jpg" alt="Salon Item Info Tablet View" loading="lazy">
+                        <div class="caption">Salon Item Info Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/SalonVyMobile.jpg" alt="Salon Mobile View" loading="lazy">
+                        <div class="caption">Salon Mobile View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/SalonVyTablet.jpg" alt="Salon Tablet View" loading="lazy">
+                        <div class="caption">Salon Tablet View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Blog.jpg" alt="Blog View" loading="lazy">
+                        <div class="caption">Blog View</div>
+                    </div>
+                    <div class="gallery-item" tabindex="0">
+                        <img src="assets/Salon.jpg" alt="Salon View" loading="lazy">
+                        <div class="caption">Salon View</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Galleri framstegsindikator -->
+            <div class="mt-lg mb-lg">
+                <h4>Färdigställande av webbplatsen</h4>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 100%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="text-right text-small">100% klart</p>
+            </div>
+        </div>
+        
+        <!-- Modal för galleri -->
+        <div id="galleryModal" class="gallery-modal" aria-hidden="true" role="dialog" aria-labelledby="galleryModalTitle">
+            <button class="close-modal" aria-label="Stäng bildvisare">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <button class="prev" aria-label="Föregående bild">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <img id="modalImage" class="modal-content" src="" alt="Förstorad bild">
+            <button class="next" aria-label="Nästa bild">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
+            <div class="modal-indicators" aria-hidden="true">
+                <!-- Dynamiska indikatorer genereras av JavaScript -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    </main>
+
+    <!-- Sidfot -->
+    <footer role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Om projektet</h4>
+                <p>Detta examensarbete utforskar användarupplevelse och tillgänglighet för MakeUp Institute Stockholm med fokus på att skapa en modern och inkluderande digital närvaro.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Snabblänkar</h4>
+                <ul class="footer-links">
+                    <li><a href="#introduktion">Introduktion</a></li>
+                    <li><a href="#resultat">Resultat</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                    <li><a href="#dokument">Dokument</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Sociala medier</h4>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/rai-gomes-6487b2153/" aria-label="LinkedIn profil" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://github.com/raigomessw" aria-label="GitHub profil" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.raigmsportfolio.com/" aria-label="Portfolio webbplats" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-globe" aria-hidden="true"></i>
+                    </a>
+                </div>
+                
+                <!-- Växla tema i sidfoten också -->
+                <div class="footer-theme-toggle">
+                    <span>Tema: </span>
+                    <button id="footerThemeToggle" class="theme-toggle-footer" aria-label="Växla mellan mörkt och ljust läge">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Rai Gomes | Examensarbete - MakeUp Institute Stockholm</p>
+            
+            <button id="scrollToTop" class="top-btn" aria-label="Skrolla till toppen av sidan">
+                <i class="fas fa-chevron-up" aria-hidden="true"></i>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Skript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js" integrity="sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA=" crossorigin="anonymous"></script>
+
+  <script src="./js/home.js"></script>
+    <script src="./js/mobile-menu.js"></script>
+</body>
+</html>

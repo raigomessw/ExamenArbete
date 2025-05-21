@@ -1,0 +1,962 @@
+/**
+ * FIL: themes.css
+ * BESKRIVNING: Stilar för ljust och mörkt tema
+ * FÖRFATTARE: Rai Gomes
+ * VERSION: 1.0
+ * DATUM: 12 maj 2025
+ */
+
+/* =========================================
+   MÖRKT TEMA
+   ========================================= */
+:root.dark-theme,
+body.dark-theme {
+  --body-bg: var(--dark-body-bg);
+  --section-bg: var(--dark-section-bg);
+  --dark-text: var(--dark-text-color);
+  --border-color: var(--dark-border-color);
+  --background: var(--dark-background);
+  --background-light: var(--dark-background-light);
+  
+  color: var(--dark-text-color);
+  background-color: var(--dark-body-bg);
+}
+
+/* Script för att ladda temat innan DOM är klar och undvika blixt */
+:root {
+  color-scheme: light dark;
+}
+
+/* Specifika justeringar för mörkt tema */
+body.dark-theme header {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid var(--dark-border-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Förbättrad kontrast på element i mörkt läge */
+@keyframes borderPulse {
+  0% {
+    border-color: #4a69bd;
+  }
+  50% {
+    border-color: #63b3ed;
+  }
+  100% {
+    border-color: #4a69bd;
+  }
+}
+
+body.dark-theme .feature-box {
+  background: linear-gradient(135deg, #2d3748, #1a202c);
+  border: 1px solid #4a69bd;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+body.dark-theme .feature-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+  border-color: #5a79cd;
+  animation: borderPulse 2s infinite;
+}
+
+body.dark-theme .feature-box h3 {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+body.dark-theme .feature-box p {
+  color: #cbd5e0;
+}
+
+body.dark-theme .btn-primary {
+  background-color: #4a69bd;
+  color: white;
+}
+
+body.dark-theme .carousel-caption {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+body.dark-theme .testimonial-card {
+  background-color: #2a2a2a;
+  border-color: #333;
+}
+
+body.dark-theme .accordion-item {
+  background-color: #2a2a2a;
+  border-color: #333;
+}
+
+body.dark-theme .accordion-header {
+  background-color: #252525;
+}
+
+/* Gemensamma stilar för alla säsongskort i mörkt tema */
+body.dark-theme .season-card {
+  transition: transform 0.35s ease-out, box-shadow 0.35s ease-out, border-color 0.35s ease;
+}
+
+body.dark-theme .season-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 6px 12px rgba(74, 105, 189, 0.15);
+}
+
+body.dark-theme .season-header {
+  transition: background-color 0.3s ease;
+}
+
+/* Gemensamma stilar för säsongsikoner i mörkt tema */
+body.dark-theme .season-icon {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, color 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+body.dark-theme .season-card:hover .season-icon {
+  transform: scale(1.2);
+}
+
+body.dark-theme .season-content {
+  padding: 20px;
+  position: relative;
+}
+
+body.dark-theme .season-content::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(74, 105, 189, 0.5), transparent);
+}
+
+body.dark-theme .stat-item {
+  color: #333333;
+}
+
+body.dark-theme .stat-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+body.dark-theme .stat-value {
+  color: #779aff;
+  font-weight: 700;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme .stat-bar {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .stat-item:hover + .stat-bar {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-theme .stat-bar-fill {
+  background-color: #4a69bd;
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 20px 20px;
+  animation: progress-bar-stripes 2s linear infinite;
+}
+
+body.dark-theme .season-card:hover .stat-bar-fill {
+  animation: progress-bar-stripes 2s linear infinite, width-pulse 2s infinite;
+}
+
+@keyframes width-pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+@keyframes progress-bar-stripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+
+body.dark-theme section {
+  background-color: var(--dark-section-bg);
+  border-color: #ebe7e7;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .card {
+  background-color: var(--dark-background);
+  border: 1px solid var(--dark-border-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: var(--dark-text-color);
+}
+
+body.dark-theme .accordion-body {
+  background-color: var(--dark-background);
+}
+
+body.dark-theme .info-card {
+  background-color: var(--dark-background-light);
+  border-color: var(--primary-color);
+}
+
+body.dark-theme input,
+body.dark-theme textarea,
+body.dark-theme select {
+  background-color: var(--dark-background);
+  color: var(--dark-text-color);
+  border: 1px solid var(--dark-border-color);
+}
+
+body.dark-theme input:focus,
+body.dark-theme textarea:focus,
+body.dark-theme select:focus {
+  border-color: var(--primary-color);
+}
+
+body.dark-theme .tab-button {
+  color: var(--dark-text-color);
+}
+
+body.dark-theme footer {
+  background-color: #1a1a1a;
+  border-top: 1px solid var(--dark-border-color);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Ytterligare förbättringar för mörkt läge */
+body.dark-theme a {
+  color: #7aa3ff;
+}
+
+body.dark-theme a:hover {
+  color: #a8c4ff;
+}
+
+body.dark-theme .results-table {
+  background-color: #252525;
+  border-color: #444;
+}
+
+body.dark-theme .results-table th {
+  background-color: #333;
+  color: #fff;
+  border-color: #444;
+}
+
+body.dark-theme .results-table td {
+  border-color: #444;
+  color: #ccc;
+}
+
+body.dark-theme .results-table tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
+
+body.dark-theme .results-table tr:hover {
+  background-color: #333;
+}
+
+@media (max-width: 640px) {
+  body.dark-theme .results-table tbody th {
+    background-color: #333;
+    border-color: #444;
+    border-right: 1px solid #555;
+  }
+}
+
+body.dark-theme blockquote {
+  border-color: #444;
+  background-color: #292929;
+}
+
+body.dark-theme .stat-bar {
+  background-color: #333;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme .gallery-item {
+  background-color: #252525;
+  border-color: #333;
+}
+
+body.dark-theme .gallery-item:hover {
+  border-color: #4a69bd;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .caption {
+  color: #e0e0e0;
+}
+
+body.dark-theme .form-group label {
+  color: #e0e0e0;
+}
+
+body.dark-theme .tab-button {
+  background-color: #333;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+body.dark-theme .tab-button.active {
+  background-color: #4a69bd;
+  color: white;
+  border-color: #4a69bd;
+}
+
+/* Förbättrade flikar, inklusive "Bilder" i mörkt läge */
+body.dark-theme .tabs-container {
+  background-color: var(--dark-background);
+  border: 1px solid var(--dark-border-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .tab-button {
+  background-color: #252525;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  margin: 5px;
+}
+
+body.dark-theme .tab-button:hover {
+  background-color: #333;
+  border-color: #555;
+}
+
+body.dark-theme .tab-button.active {
+  background-color: #4a69bd;
+  color: white;
+  border-color: #4a69bd;
+  font-weight: 600;
+}
+
+body.dark-theme .tab-content {
+  background-color: var(--dark-background);
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--dark-border-color);
+}
+
+/* Åtgärda kontrastproblem i länkar */
+body.dark-theme .footer-links a,
+body.dark-theme .contact-list a,
+body.dark-theme .nav-links a {
+  color: #a8c4ff;
+  text-decoration: none;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+body.dark-theme .footer-links a:hover,
+body.dark-theme .contact-list a:hover,
+body.dark-theme .nav-links a:hover {
+  color: #d1e0ff;
+  text-decoration: underline;
+}
+
+/* Förbättra karusellen i mörkt läge */
+body.dark-theme .carousel-button {
+  background-color: rgba(74, 105, 189, 0.8);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .carousel-button:hover {
+  background-color: rgba(93, 126, 206, 0.9);
+}
+
+body.dark-theme .carousel-dot {
+  background-color: #555;
+  border: 1px solid #777;
+}
+
+body.dark-theme .carousel-dot[aria-current="true"] {
+  background-color: #7aa3ff;
+  transform: scale(1.2);
+  border-color: #7aa3ff;
+}
+
+body.dark-theme .carousel-item {
+  background-color: #181818;
+  border: 1px solid #333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .carousel-container {
+  background-color: #181818;
+  border: 1px solid #333;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .carousel-item img {
+  border: 1px solid #333;
+}
+
+/* Åtgärda flytande navigering i mörkt läge */
+body.dark-theme .floating-nav {
+  background-color:transparent;
+}
+
+body.dark-theme .floating-nav-dot {
+  border-color: #444;
+  background-color: #333;
+}
+
+body.dark-theme .floating-nav-item.active .floating-nav-dot,
+body.dark-theme .floating-nav-item:hover .floating-nav-dot {
+  background-color: #7aa3ff;
+  border-color: #7aa3ff;
+}
+
+body.dark-theme .floating-nav-text {
+  color: #e0e0e0;
+}
+
+body.dark-theme .progress-indicator {
+  background-color: #4a69bd;
+}
+
+/* Förbättra tidslinje i mörkt läge */
+body.dark-theme .timeline::before {
+  background-color: #444;
+}
+
+body.dark-theme .timeline-item::before {
+  background-color: #4a69bd;
+  border-color: #333;
+  box-shadow: 0 0 0 4px rgba(74, 105, 189, 0.3);
+}
+
+body.dark-theme .timeline-date {
+  background-color: #333;
+  color: #e0e0e0;
+  border-color: #4a69bd;
+}
+
+body.dark-theme .timeline-content {
+  background-color: #252525;
+  border-color: #444;
+}
+
+/* Förbättra formulär i mörkt läge */
+body.dark-theme .form-container {
+  background-color: #1e1e1e;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme form {
+  background-color: #2a2a2a;
+  border: 1px solid #4a69bd;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme input, 
+body.dark-theme textarea,
+body.dark-theme select {
+  background-color: #252525;
+  border-color: #555;
+  color: #ffffff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme input::placeholder, 
+body.dark-theme textarea::placeholder {
+  color: #999;
+}
+
+body.dark-theme input:focus,
+body.dark-theme textarea:focus,
+body.dark-theme select:focus {
+  border-color: #4a69bd;
+  box-shadow: 0 0 0 2px rgba(74, 105, 189, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .form-group label {
+  color: #f0f0f0;
+  font-weight: 500;
+}
+
+body.dark-theme .submit-btn {
+  background-color: #4a69bd;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+body.dark-theme .submit-btn:hover {
+  background-color: #5a79cd;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .error-message {
+  color: #ff6b6b;
+  font-weight: 500;
+}
+
+body.dark-theme label {
+  color: #f0f0f0;
+  font-weight: 500;
+}
+
+/* Förbättra knappar i mörkt läge */
+body.dark-theme .btn {
+  background-color: #4a69bd;
+  color: white;
+  border-color: #4a69bd;
+}
+
+body.dark-theme .btn:hover,
+body.dark-theme .btn:focus {
+  background-color: #5d7ece;
+  border-color: #5d7ece;
+}
+
+body.dark-theme .submit-btn {
+  background-color: #4a69bd;
+  color: white;
+}
+
+body.dark-theme .submit-btn:hover,
+body.dark-theme .submit-btn:focus {
+  background-color: #5d7ece;
+}
+
+body.dark-theme .download-btn {
+  background-color: #4a69bd;
+  color: white;
+}
+
+body.dark-theme .download-btn:hover {
+  background-color: #5d7ece;
+}
+
+/* Förbättra ikoner och dekorationer i mörkt läge */
+body.dark-theme .fas, 
+body.dark-theme .fab,
+body.dark-theme .far,
+body.dark-theme .fa-solid,
+body.dark-theme .fa-regular,
+body.dark-theme .fa-brands {
+  color: #7aa3ff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+body.dark-theme .accordion-header i {
+  color: #7aa3ff;
+}
+
+body.dark-theme .feature-box i {
+  color: #63b3ed;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, color 0.3s;
+}
+
+body.dark-theme .feature-box:hover i {
+  color: #90cdf4;
+  transform: scale(1.2) rotate(5deg);
+}
+
+body.dark-theme .social-icon {
+  color: #ffffff;
+  background-color: #4a69bd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+body.dark-theme .social-icon:hover {
+  transform: translateY(-3px);
+  background-color: #5d7ece;
+}
+
+/* Förbättra introduktionskort i mörkt läge */
+body.dark-theme .intro-card {
+  background-color: #2d3748;
+  border: 1px solid #4a69bd;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+body.dark-theme .intro-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  border-color: #5a79cd;
+}
+
+body.dark-theme .intro-card h2,
+body.dark-theme .intro-card h3,
+body.dark-theme h2,
+body.dark-theme h3 {
+  color: #e2e8f0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .intro-card p {
+  color: #cbd5e0;
+  line-height: 1.6;
+}
+
+body.dark-theme .intro-card i,
+body.dark-theme .intro-card .fas,
+body.dark-theme .intro-card .fab {
+  color: #5a79cd;
+  font-size: 1.2em;
+  margin-right: 8px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .intro-card img {
+  filter: brightness(0.9) contrast(1.1);
+  border: 1px solid #4a69bd;
+}
+
+body.dark-theme .intro-card a {
+  color: #63b3ed;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+body.dark-theme .intro-card a:hover {
+  color: #90cdf4;
+  text-decoration: underline;
+}
+
+/* Förbättra markeringar i mörkt läge */
+body.dark-theme .highlight {
+  background-color: rgba(74, 105, 189, 0.2);
+  color: #ffffff;
+}
+
+/* Förbättra rubriker i mörkt läge */
+body.dark-theme .section-header {
+  color: #ffffff;
+  border-bottom-color: #4a69bd;
+}
+
+body.dark-theme .section-subheader {
+  color: #e0e0e0;
+}
+
+/* Förbättra före/efter jämförelsebilder i mörkt läge */
+body.dark-theme .comparison-container {
+  background-color: #181818;
+  border: 1px solid #444;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+}
+
+body.dark-theme .comparison-image {
+  border: 1px solid #444;
+}
+
+body.dark-theme .comparison-label {
+  color: #ffffff;
+  background-color: rgba(74, 105, 189, 0.8);
+  padding: 5px 10px;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Förbättra texter och rubriker i mörkt läge för bättre kontrast */
+body.dark-theme h1 {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme h2 {
+  color: #ffffff;
+  border-bottom: 2px solid #4a69bd;
+  padding-bottom: 8px;
+  margin-bottom: 1rem;
+}
+
+body.dark-theme h3, 
+body.dark-theme h4, 
+body.dark-theme h5 {
+  color: #ffffff;
+}
+
+body.dark-theme p {
+  color: var(--dark-text-color);
+}
+
+body.dark-theme a.link-highlight {
+  color: #7aa3ff;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+body.dark-theme .text-muted {
+  color: #b0b0b0;
+}
+
+body.dark-theme .lead {
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
+/* Förbättra listor i mörkt läge */
+body.dark-theme ul li, 
+body.dark-theme ol li {
+  color: var(--dark-text-color);
+}
+
+body.dark-theme li::marker {
+  color: #7aa3ff;
+}
+
+/* =========================================
+   KNAPP FÖR TEMABYTE 
+   ========================================= */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  color: var(--dark-text);
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: rotate(15deg);
+}
+
+body.dark-theme .theme-toggle {
+  color: var(--light-text);
+}
+
+body.dark-theme .theme-toggle:hover,
+body.dark-theme .theme-toggle:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Mjuk animering vid temaövergång */
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+header, section, footer, .card, .feature-box, .accordion-header, .accordion-body,
+input, textarea, select, button, a, .tabs-container, .tab-button {
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Förhindra innehållsblixt vid sidladdning */
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition-delay: 0ms !important;
+  transition-duration: 0ms !important;
+}
+
+/* Förbättra diagram i mörkt läge */
+body.dark-theme .chart-container {
+  background-color: #1e1e1e;
+  border: 1px solid #444;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+/* Säkerställ att diagramtexten är synlig */
+body.dark-theme .chartjs-render-monitor {
+  color: var(--dark-text-color) !important;
+}
+
+/* Lägg till stilar för text inom chart.js */
+body.dark-theme .chart-container .chartjs-size-monitor,
+body.dark-theme .chart-container canvas {
+  filter: brightness(1.1);
+}
+
+/* Förbättra läsbarhet för diagram */
+body.dark-theme .chart-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.05);
+  z-index: -1;
+  border-radius: var(--border-radius-md);
+}
+
+/* Stila diagram-tooltips i mörkt läge */
+body.dark-theme .chartjs-tooltip {
+  background-color: #252525 !important;
+  border-color: #444 !important;
+  color: var(--dark-text-color) !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Stil för funktionsbehållare i mörkt tema */
+body.dark-theme .features-container {
+  display: grid;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: rgba(26, 32, 44, 0.4);
+  border-radius: var(--border-radius-lg);
+}
+
+/* Färger för årstider - Mörkt tema */
+body.dark-theme .season-spring {
+  background: linear-gradient(315deg, #193731, #0d2622);
+  border: 1px solid #4db6ac;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-theme .season-spring .season-header {
+  background-color: #00796b;
+  color: white;
+}
+
+body.dark-theme .season-spring .season-icon {
+  color: #4db6ac;
+}
+
+body.dark-theme .season-spring .stat-bar-fill {
+  background-color: #009688;
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+body.dark-theme .season-summer {
+  background: linear-gradient(315deg, #33280d, #221c06);
+  border: 1px solid #ffd54f;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-theme .season-summer .season-header {
+  background-color: #ffa000;
+  color: #212121;
+}
+
+body.dark-theme .season-summer .season-icon {
+  color: #ffd54f;
+}
+
+body.dark-theme .season-summer .stat-bar-fill {
+  background-color: #ffc107;
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+body.dark-theme .season-autumn {
+  background: linear-gradient(315deg, #331f1f, #211515);
+  border: 1px solid #ef9a9a;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-theme .season-autumn .season-header {
+  background-color: #c62828;
+  color: white;
+}
+
+body.dark-theme .season-autumn .season-icon {
+  color: #ef9a9a;
+}
+
+body.dark-theme .season-autumn .stat-bar-fill {
+  background-color: #e57373;
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+body.dark-theme .season-winter {
+  background: linear-gradient(315deg, #1a1f33, #10152b);
+  border: 1px solid #9fa8da;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-theme .season-winter .season-header {
+  background-color: #3949ab;
+  color: white;
+}
+
+body.dark-theme .season-winter .season-icon {
+  color: #9fa8da;
+}
+
+body.dark-theme .season-winter .stat-bar-fill {
+  background-color: #7986cb;
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+/* Stilar för säsongsstatistiktexter - Mörkt tema */
+body.dark-theme .season-spring .stat-label {
+  color: #607d8b;
+}
+
+body.dark-theme .season-spring .stat-value {
+  color: #4db6ac;
+}
+
+body.dark-theme .season-summer .stat-label {
+  color: #607d8b;
+}
+
+body.dark-theme .season-summer .stat-value {
+  color: #ffc107;
+}
+
+body.dark-theme .season-autumn .stat-label {
+  color: #607d8b;
+}
+
+body.dark-theme .season-autumn .stat-value {
+  color: #ef9a9a;
+}
+
+body.dark-theme .season-winter .stat-label {
+  color: #607d8b;
+}
+
+body.dark-theme .season-winter .stat-value {
+  color: #9fa8da;
+}
+
+/* Stilar för responsiv datatabellbehållare - Mörkt tema */
+body.dark-theme .data-table-container {
+  background-color: #252525;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  scrollbar-color: #4a69bd #333;
+}
+
+body.dark-theme .data-table-container::-webkit-scrollbar-track {
+  background: #333;
+}
+
+body.dark-theme .data-table-container::-webkit-scrollbar-thumb {
+  background-color: #4a69bd;
+}
+
+/* Stilar för tabellens rullningstips i mörkt tema */
+body.dark-theme .scroll-hint {
+  color: #999;
+}

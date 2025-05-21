@@ -1,0 +1,348 @@
+/**
+ * FIL: utilities.css
+ * BESKRIVNING: Hjälpklasser för layout och snabba justeringar
+ * FÖRFATTARE: Rai Gomes
+ * VERSION: 2.0
+ * DATUM: 12 maj 2025
+ */
+
+/* =========================================
+   LAYOUT-HJÄLPMEDEL
+   ========================================= */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-start {
+  align-items: flex-start;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.gap-xs { gap: var(--spacing-xs); }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+.gap-xl { gap: var(--spacing-xl); }
+
+/* =========================================
+   AVSTÅNDSHJÄLPMEDEL
+   ========================================= */
+.m-0 { margin: 0; }
+.mt-0 { margin-top: 0; }
+.mr-0 { margin-right: 0; }
+.mb-0 { margin-bottom: 0; }
+.ml-0 { margin-left: 0; }
+
+.mt-xs { margin-top: var(--spacing-xs); }
+.mr-xs { margin-right: var(--spacing-xs); }
+.mb-xs { margin-bottom: var(--spacing-xs); }
+.ml-xs { margin-left: var(--spacing-xs); }
+
+.mt-sm { margin-top: var(--spacing-sm); }
+.mr-sm { margin-right: var(--spacing-sm); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.ml-sm { margin-left: var(--spacing-sm); }
+
+.mt-md { margin-top: var(--spacing-md); }
+.mr-md { margin-right: var(--spacing-md); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.ml-md { margin-left: var(--spacing-md); }
+
+.mt-lg { margin-top: var(--spacing-lg); }
+.mr-lg { margin-right: var(--spacing-lg); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.ml-lg { margin-left: var(--spacing-lg); }
+
+.mt-xl { margin-top: var(--spacing-xl); }
+.mr-xl { margin-right: var(--spacing-xl); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+.ml-xl { margin-left: var(--spacing-xl); }
+
+/* =========================================
+   TEXTHJÄLPMEDEL
+   ========================================= */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+.text-bold { font-weight: var(--font-weight-bold); }
+.text-normal { font-weight: var(--font-weight-normal); }
+
+.text-primary { color: var(--primary-color); }
+.text-dark { color: var(--dark-text); }
+.text-light { color: var(--light-text); }
+.text-success { color: var(--success-color); }
+.text-error { color: var(--error-color); }
+
+.text-small { font-size: 0.8rem; }
+.text-large { font-size: 1.2rem; }
+.text-xl { font-size: 1.5rem; }
+.text-muted { color: var(--text-muted); }
+.text-accent { color: var(--accent-color); }
+
+/* =========================================
+   SYNLIGHETSHJÄLPMEDEL
+   ========================================= */
+.hidden { display: none; }
+
+.invisible { 
+  visibility: hidden; 
+  opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .hidden-mobile { display: none; }
+}
+
+@media screen and (min-width: 769px) and (max-width: 991px) {
+  .hidden-tablet { display: none; }
+}
+
+@media screen and (min-width: 992px) {
+  .hidden-desktop { display: none; }
+}
+
+/* =========================================
+   RAM- OCH SKUGGHJÄLPMEDEL
+   ========================================= */
+.border {
+  border: 1px solid var(--border-color);
+}
+
+.border-top {
+  border-top: 1px solid var(--border-color);
+}
+
+.border-right {
+  border-right: 1px solid var(--border-color);
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.border-left {
+  border-left: 1px solid var(--border-color);
+}
+
+.border-radius-sm {
+  border-radius: var(--border-radius-sm);
+}
+
+.border-radius-md {
+  border-radius: var(--border-radius-md);
+}
+
+.border-radius-lg {
+  border-radius: var(--border-radius-lg);
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+/* =========================================
+   BAKGRUNDSHJÄLPMEDEL
+   ========================================= */
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.bg-dark {
+  background-color: var(--dark-text);
+}
+
+.bg-light {
+  background-color: var(--light-text);
+}
+
+.bg-section {
+  background-color: var(--section-bg);
+}
+
+.bg-body {
+  background-color: var(--body-bg);
+}
+
+.bg-success {
+  background-color: var(--success-color);
+}
+
+.bg-error {
+  background-color: var(--error-color);
+}
+
+/* =========================================
+   RUTNÄTSHJÄLPMEDEL
+   ========================================= */
+.grid {
+  display: grid;
+}
+
+.grid-col-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-col-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-col-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.grid-gap-md {
+  gap: var(--spacing-md);
+}
+
+.grid-gap-lg {
+  gap: var(--spacing-lg);
+}
+
+@media screen and (max-width: 768px) {
+  .grid-col-2,
+  .grid-col-3,
+  .grid-col-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 991px) {
+  .grid-col-3,
+  .grid-col-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================
+   TILLGÄNGLIGHETSHJÄLPMEDEL
+   ========================================= */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focusable:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* =========================================
+   POSITIONSHJÄLPMEDEL
+   ========================================= */
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.sticky {
+  position: sticky;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.bottom-0 {
+  bottom: 0;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.z-back {
+  z-index: var(--z-back);
+}
+
+.z-normal {
+  z-index: var(--z-normal);
+}
+
+.z-tooltip {
+  z-index: var(--z-tooltip);
+}
+
+.z-fixed {
+  z-index: var(--z-fixed);
+}
+
+.z-modal {
+  z-index: var(--z-modal);
+}
