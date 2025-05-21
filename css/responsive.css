@@ -1,0 +1,862 @@
+/**
+ * BESKRIVNING: Samlad fil för alla responsiva stilar i webbplatsen
+ * FÖRFATTARE: Rai Gomes
+ * VERSION: 2.1
+ * DATUM: 21 maj 2025
+ */
+
+/* =========================================
+   INNEHÅLLSFÖRTECKNING
+   ========================================= 
+   
+   1. GLOBAL RESPONSIVITET
+   2. RESPONSIVITET FÖR SPECIFIKA SKÄRMSTORLEKAR
+   3. NAVBAR OCH HEADER RESPONSIVITET
+   4. HAMBURGAREMENY OCH DROPDOWN
+   5. PORTFOLIO-LÄNK RESPONSIVITET
+   6. LANDSKAPSLÄGE OCH SPECIALENHETER
+   7. IOS OCH SAFARI-SPECIFIKA KORRIGERINGAR
+   8. SÄKER OMRÅDE (NOTCH) HANTERING
+   9. ANIMATIONER OCH ÖVERGÅNGAR
+   ========================================= */
+
+/* =========================================
+   1. GLOBAL RESPONSIVITET
+   ========================================= */
+
+
+
+/* Gör bilder responsiva */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================================
+   2. RESPONSIVITET FÖR SPECIFIKA SKÄRMSTORLEKAR
+   ========================================= */
+   
+/* Responsivitet för större skärmar (över 1400px) */
+@media (min-width: 1401px) {
+  .container, .header-container {
+    max-width: 1320px;
+  }
+}
+
+/* Standard desktop */
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .container, .header-container {
+    max-width: 1140px;
+  }
+}
+
+/* Mindre desktop och större tablets */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .container, .header-container {
+    max-width: 960px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 991px) {
+  .container, .header-container {
+    max-width: 720px;
+  }
+  
+  h1 {
+    font-size: 2.25rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  .desktop-nav .nav-list {
+    gap: 1rem;
+  }
+  
+  section {
+    padding: 3rem 0;
+  }
+}
+
+/* Större mobiler och små tablets */
+@media (min-width: 576px) and (max-width: 767px) {
+  .container, .header-container {
+    max-width: 540px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  section {
+    padding: 2.5rem 0;
+  }
+}
+
+/* Mobila enheter */
+@media (max-width: 575px) {
+  .container {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+  }
+  
+  section {
+    padding: 2rem 0;
+  }
+}
+
+/* Mycket små mobila enheter */
+@media (max-width: 320px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+  }
+  
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Höjdjusteringar för små skärmar i landskapsläge */
+@media (max-height: 500px) and (orientation: landscape) {
+  .header {
+    position: relative;
+  }
+  
+  section {
+    padding: 1.5rem 0;
+  }
+}
+
+/* =========================================
+   3. NAVBAR OCH HEADER RESPONSIVITET
+   ========================================= */
+
+/* Breakpoint intermediário para telas médias (tablets e dispositivos menores) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .desktop-nav .nav-list {
+    gap: 1.5rem;
+  }
+  
+  .desktop-nav .nav-item a {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .header-container {
+    padding: 0.75rem 1.25rem;
+  }
+  
+  /* Ajusta o logo para economizar espaço */
+  .logo-primary {
+    font-size: 1.1rem;
+  }
+  
+  .logo-secondary {
+    font-size: 0.75rem;
+  }
+}
+
+/* Breakpoint para telas pequenas, mas ainda no modo desktop */
+@media (min-width: 769px) and (max-width: 860px) {
+  .desktop-nav .nav-list {
+    gap: 1rem;
+  }
+  
+  .desktop-nav .nav-item a {
+    padding: 0.4rem 0.4rem;
+    font-size: 0.9rem;
+  }
+  
+  .desktop-nav .nav-item-portfolio-link a {
+    padding: 5px 12px !important;
+    font-size: 0.85em;
+  
+  }
+}
+
+/* =========================================
+   4. HAMBURGAREMENY OCH OFF-CANVAS MENU
+   ========================================= */
+
+/* Specifik fix för att säkerställa att hamburgermenyn visas på mobila enheter */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+  
+  .menu-toggle {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    cursor: pointer;
+    z-index: 1010; /* Valor alto para garantir que fique acima de outros elementos */
+  }
+  
+  .off-canvas-trigger {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    cursor: pointer;
+  }
+  
+  .hamburger {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    width: 24px !important;
+    height: 20px !important;
+    position: relative !important;
+    cursor: pointer !important;
+    z-index: 1010 !important;
+  }
+  
+  .hamburger span {
+    display: block !important;
+    height: 2px !important;
+    width: 100% !important;
+    background-color: white !important; /* Cor explícita */
+    border-radius: 2px !important;
+    transition: all 0.3s ease !important;
+    margin: 1px 0 !important; /* Espaçamento entre as barras */
+  }
+  
+  .hamburger span:nth-child(1) {
+    transform-origin: top left;
+  }
+  
+  .hamburger span:nth-child(3) {
+    transform-origin: bottom left;
+  }
+  
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg);
+  }
+  
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+  
+  .mobile-menu-container {
+    display: block !important;
+    position: relative;
+    z-index: 1002;
+  }
+  
+  /* Specifika förbättringar för mobila enheter */
+  .mobile-nav {
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* För smidig scrollning på iOS */
+  }
+  
+  .mobile-nav .nav-item {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mobile-nav .nav-item a {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+  
+  /* Undviker layoutproblem på mycket små skärmar */
+  .logo-primary {
+    font-size: 1rem;
+  }
+}
+
+/* =========================================
+   5. PORTFOLIO-LÄNK RESPONSIVITET
+   ========================================= */
+
+/* Portfolio-länk på desktop */
+@media (min-width: 769px) {
+  .nav-item-portfolio-link a {
+    padding: 6px 16px !important;
+    font-size: 0.9em;
+  }
+  
+  /* Mindre skärmar i desktop-läge */
+  @media (max-width: 991px) {
+    .nav-item-portfolio-link a {
+      padding: 5px 14px !important;
+      font-size: 0.85em;
+    }
+  }
+}
+
+/* Portfolio-länk på mobil */
+@media (max-width: 768px) {
+  .portfolio-link-mobile a {
+    padding: 8px 18px !important;
+    font-size: 0.95em;
+    margin-top: 12px !important;
+    display: inline-flex !important;
+  }
+}
+
+/* Mycket små enheter */
+@media (max-width: 359px) {
+  .portfolio-link-mobile a {
+    padding: 7px 14px !important;
+    font-size: 0.85em;
+  }
+}
+
+/* =========================================
+   6. LANDSKAPSLÄGE OCH SPECIALENHETER
+   ========================================= */
+
+/* Fix för mycket små mobila enheter (mindre än 360px) */
+@media (max-width: 360px) {
+  .header-container {
+    padding: 0.6rem 0.75rem;
+  }
+  
+  .logo-primary {
+    font-size: 0.95rem;
+  }
+  
+  .logo-secondary {
+    font-size: 0.65rem;
+  }
+  
+  .control-button {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Fix för mellanstora mobila enheter som behöver kompakt layout */
+@media (max-width: 420px) {
+  .header-controls {
+    gap: 0.5rem;
+  }
+}
+
+/* Fix för enheter i landskapsläge (låg men bred skärm) */
+@media (max-height: 450px) and (orientation: landscape) {
+  .portfolio-link-mobile {
+    margin-top: 8px !important;
+  }
+  
+  .portfolio-link-mobile a {
+    padding: 8px 16px !important;
+  }
+}
+
+/* =========================================
+   7. IOS OCH SAFARI-SPECIFIKA KORRIGERINGAR
+   ========================================= */
+
+/* Fix för safari på iOS */
+@supports (-webkit-touch-callout: none) {
+  .header {
+    position: -webkit-sticky;
+  }
+  
+  .off-canvas-menu {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* =========================================
+   8. SÄKER OMRÅDE (NOTCH) HANTERING
+   ========================================= */
+
+/* Safe area insets för enheter med notch/karusellfunktioner */
+@supports (padding: max(0px)) {
+  .off-canvas-menu {
+    padding-left: max(0.5rem, env(safe-area-inset-left));
+    padding-right: max(0.5rem, env(safe-area-inset-right));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  .header-container {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+}
+
+/* =========================================
+   9. ANIMATIONER OCH ÖVERGÅNGAR
+   ========================================= */
+
+/* Animações para o menu off-canvas */
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+}
+
+/* Melhoria de efeito hover para links do menu */
+@media (hover: hover) {
+  .off-canvas-menu .nav-item a {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .off-canvas-menu .nav-item a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: width 0.3s ease;
+  }
+  
+  .off-canvas-menu .nav-item a:hover::before {
+    width: 100%;
+  }
+}
+
+/* Animationer för portfolio-knappen */
+@media (min-width: 769px) {
+  @keyframes pulse-desktop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes float-desktop {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .nav-item-portfolio-link a i {
+    animation: pulse-desktop 2s infinite;
+  }
+  
+  .pulse-button {
+    animation: float-desktop 3s ease-in-out infinite;
+  }
+}
+
+/* Animationer för mobilversionen */
+@media (max-width: 768px) {
+  @keyframes pulse-mobile {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes float-mobile {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .portfolio-link-mobile a i {
+    animation: pulse-mobile 2s infinite;
+  }
+  
+  .pulse-button-mobile {
+    animation: float-mobile 3s ease-in-out infinite;
+  }
+}
+
+/* Optimeringar för off-canvas på olika skärmstorlekar */
+/* Tablets och mellanstora skärmar */
+@media (min-width: 576px) and (max-width: 768px) {
+  .off-canvas-menu {
+    width: 45%;
+    max-width: 320px;
+  }
+  
+  .off-canvas-menu .nav-item a {
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Särskild optimering för iPhone SE och likande små enheter */
+@media (max-width: 375px) {
+  .off-canvas-menu {
+    min-width: 180px;
+    width: 55%;
+    max-width: 230px;
+  }
+  
+  .off-canvas-menu .nav-item a {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+  
+  .off-canvas-menu .nav-item a i {
+    margin-right: 0.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Enhetsspecifika förbättringar för off-canvas */
+
+/* Touch-enhet optimering - större träffytor och responseffekter */
+@media (pointer: coarse) {
+  .off-canvas-menu .nav-item a {
+    padding: 0.9rem 1.5rem; /* Större touchyta för fingrar */
+    position: relative;
+  }
+  
+  .off-canvas-menu .nav-item a:active {
+    background-color: rgba(255, 255, 255, 0.15); /* Tydligare visuell feedback vid tryck */
+    transform: scale(0.98); /* Subtil tryckeffekt */
+  }
+  
+  /* Förbättra avstånd mellan objekt för enklare touch */
+  .off-canvas-menu .nav-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .off-canvas-menu .nav-item:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Förbättrad tillgänglighet */
+.off-canvas-menu:focus-within {
+  outline: 2px solid rgba(255, 255, 255, 0.2);
+  outline-offset: -2px;
+}
+
+/* Förbättrad upplevelse vid användning av skärmläsare */
+.off-canvas-menu .nav-item a {
+  position: relative;
+}
+
+.off-canvas-menu .nav-item a[aria-current="page"]::after {
+  content: '(Aktiv)';
+  position: absolute;
+  right: 15px;
+  opacity: 0;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+/* =========================================
+   OFF-CANVAS MENY
+   ========================================= */
+
+.off-canvas-menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: -280px; /* Menu começa fora da tela */
+  width: 280px; /* Largura fixa em pixels */
+  height: 100%; /* Garantir altura completa */
+  background: linear-gradient(135deg, #2d3e99 0%, #1a1a2e 100%);
+  z-index: 9999; /* Valor alto para garantir que fique acima de tudo */
+  transition: right 0.3s ease, visibility 0.3s ease, opacity 0.3s ease; /* Transição específica */
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 0;
+  visibility: hidden; /* Ocultar quando não estiver ativo */
+  opacity: 0; /* Garantir invisibilidade quando não ativo */
+  pointer-events: none; /* Impedir cliques quando o menu está fechado */
+}
+
+/* Quando ativo, garantir que os estilos sejam aplicados */
+.off-canvas-menu.active {
+  right: 0 !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  pointer-events: auto !important; /* Permitir cliques quando o menu está aberto */
+}
+
+@media (max-width: 480px) {
+  .off-canvas-menu {
+    width: 80%; /* Em telas menores, ocupa mais espaço */
+    max-width: 280px;
+  }
+}
+
+/* Overlay som visas när menyn är öppen */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Contraste maior */
+  z-index: 9000; /* Alto, mas menor que o menu */
+  opacity: 0;
+  visibility: hidden;
+  display: none; /* Inicialmente escondido */
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  display: block;
+}
+
+/* Cabeçalho do menu */
+.menu-header {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 10px;
+}
+
+.menu-title {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: block;
+  text-align: center;
+}
+
+/* Stängknapp */
+.off-canvas-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* Förbättra kontrast för tillgänglighet */
+  font-size: 1.2rem;
+  z-index: 1020;
+}
+
+.off-canvas-close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.off-canvas-close:focus {
+  outline: 2px solid white;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Menystruktur */
+.off-canvas-menu .nav-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.off-canvas-menu .nav-item {
+  margin-bottom: 5px !important; /* Reduzir o espaço entre itens */
+  width: 100% !important;
+  display: block !important;
+}
+
+.off-canvas-menu .nav-item a,
+.off-canvas-menu .nav-item-portfolio-link a {
+  display: flex !important;
+  align-items: center !important;
+  padding: 12px 15px !important;
+  color: white !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  font-size: 1rem !important;
+  position: relative !important;
+  font-weight: 500 !important;
+  width: 100% !important;
+  border-left: 3px solid transparent !important;
+  box-sizing: border-box !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10001 !important; /* Garantir que esteja acima do conteúdo do menu */
+  pointer-events: auto !important; /* Garantir que eventos do mouse funcionem */
+}
+
+.off-canvas-menu .nav-item a i {
+  margin-right: 16px;
+  font-size: 1.25rem;
+  width: 24px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+/* Portfolio-knapp i off-canvas */
+.off-canvas-menu .nav-item-portfolio-link {
+  margin-top: 20px;
+  padding: 0 24px;
+}
+
+.off-canvas-menu .nav-item-portfolio-link a {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+  border-radius: 30px;
+  padding: 12px 20px;
+  color: white;
+  font-weight: bold;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(29, 38, 99, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.off-canvas-menu .nav-item-portfolio-link a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(29, 38, 99, 0.4);
+}
+
+.off-canvas-menu .nav-item-portfolio-link a:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px white, 0 6px 15px rgba(29, 38, 99, 0.4);
+}
+
+/* Menu header */
+.menu-header {
+  padding: 15px 20px 10px;
+  margin-bottom: 0; /* Reduzir o espaço após o cabeçalho */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  display: block;
+  margin-left: 5px;
+}
+
+/* Förhindra scrollning när menyn är öppen */
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* Låt skärmläsare veta om menyn är öppen */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Responsivitet för off-canvas */
+@media (min-width: 769px) {
+  .off-canvas-menu {
+    width: 40%; /* Menor em telas maiores */
+    right: -40%;
+    max-width: 300px;
+  }
+  
+  .off-canvas-menu.active {
+    transform: translateX(-100%);
+  }
+}
+
+/* Fokushantering */
+.off-canvas-menu:focus-within .off-canvas-close {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.off-canvas-content {
+  flex: 1;
+  display: flex !important;
+  flex-direction: column;
+  padding: 0; /* Remover padding para garantir que os itens comecem no topo */
+  padding-top: 10px;
+  width: 100%;
+  overflow-y: visible; /* Alterar overflow para visible */
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10000; /* Garantir que esteja acima de outros elementos */
+  position: relative; /* Estabelecer contexto de empilhamento */
+  justify-content: flex-start; /* Alinhar os itens no topo */
+  align-items: flex-start; /* Alinhar os itens no topo */
+}
+
+/* Garantir que a lista de navegação seja exibida corretamente */
+.off-canvas-menu .nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: block !important;
+  width: 100%;
+  visibility: visible !important;
+  opacity: 1 !important;
+  padding-top: 0;
+  margin-top: 0;
+  position: relative; /* Garantir posicionamento correto */
+  top: 0; /* Começar do topo */
+}
+
+/* Estilos para links hover e focus */
+.off-canvas-menu .nav-item a:hover,
+.off-canvas-menu .nav-item a:focus {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  outline: none;
+  border-left-color: rgba(255, 255, 255, 0.5);
+}
+
+.off-canvas-menu .nav-item a:focus {
+  box-shadow: 0 0 0 2px white inset;
+}
+
+.off-canvas-menu .nav-item a[aria-current="page"] {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left-color: var(--primary-color);
+  font-weight: 600;
+}
+

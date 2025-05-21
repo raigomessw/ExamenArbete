@@ -69,10 +69,12 @@
 
 .desktop-nav .nav-list {
     display: flex;
-    gap: 3rem;
+    gap: 2.5rem;
     list-style: none;
     padding: 0;
     margin: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .desktop-nav .nav-item a {
@@ -423,6 +425,48 @@
 
     .mobile-menu-container {
         display: inline-block;
+    }
+}
+
+/* Breakpoint intermediário para telas médias (tablets e dispositivos menores) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .desktop-nav .nav-list {
+        gap: 1.5rem;
+    }
+    
+    .desktop-nav .nav-item a {
+        padding: 0.5rem 0.5rem;
+        font-size: 0.95rem;
+    }
+    
+    .header-container {
+        padding: 0.75rem 1.25rem;
+    }
+    
+    /* Ajusta o logo para economizar espaço */
+    .logo-primary {
+        font-size: 1.1rem;
+    }
+    
+    .logo-secondary {
+        font-size: 0.75rem;
+    }
+}
+
+/* Breakpoint para telas pequenas, mas ainda no modo desktop */
+@media (min-width: 769px) and (max-width: 860px) {
+    .desktop-nav .nav-list {
+        gap: 1rem;
+    }
+    
+    .desktop-nav .nav-item a {
+        padding: 0.4rem 0.4rem;
+        font-size: 0.9rem;
+    }
+    
+    .desktop-nav .nav-item-portfolio-link a {
+        padding: 5px 12px !important;
+        font-size: 0.85em;
     }
 }
 

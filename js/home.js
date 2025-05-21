@@ -493,18 +493,49 @@ function optimizeGalleryModalForMobile() {
 }
 
 // =======================================
-// MOBILNAVIGATION (DROPDOWN)
+// MOBILNAVIGATION (OFF-CANVAS)
 // =======================================
 function initMobileMenu() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const dropdownMenu = document.querySelector('.dropdown-menu');
+    // Seletor mais preciso para o botão de menu
+    const menuToggle = document.querySelector('.menu-toggle.off-canvas-trigger');
+    const offCanvasMenu = document.querySelector('.off-canvas-menu');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const closeButton = document.querySelector('.off-canvas-close');
     const mobileMenuContainer = document.querySelector('.mobile-menu-container');
     const header = document.querySelector('header');
     
-    if (!menuToggle || !dropdownMenu) {
-        console.log('Dropdown-meny eller knapp hittades inte');
+    if (!menuToggle || !offCanvasMenu) {
+        console.log('Off-canvas-meny eller knapp hittades inte');
+        console.log('menuToggle:', menuToggle);
+        console.log('offCanvasMenu:', offCanvasMenu);
         return;
     }
+    
+    console.log('Menu toggle and off-canvas menu found');
+    
+    // Forçar visualização do conteúdo do menu
+    const offCanvasContent = offCanvasMenu.querySelector('.off-canvas-content');
+    if (offCanvasContent) {
+        offCanvasContent.style.visibility = 'visible';
+        offCanvasContent.style.opacity = '1';
+        offCanvasContent.style.display = 'flex';
+    }
+    
+    // Forçar visibilidade dos links
+    const navItems = offCanvasMenu.querySelectorAll('.nav-item, .nav-item-portfolio-link');
+    navItems.forEach(item => {
+        item.style.visibility = 'visible';
+        item.style.opacity = '1';
+        item.style.display = 'block';
+        
+        const link = item.querySelector('a');
+        if (link) {
+            link.style.visibility = 'visible';
+            link.style.opacity = '1';
+            link.style.display = 'flex';
+            link.style.pointerEvents = 'auto';
+        }
+    });
     
     // Se till att elementen är synliga på mobilskärmar
     if (window.innerWidth <= 768) {
@@ -519,11 +550,15 @@ function initMobileMenu() {
     
     // Kontrollera och korrigera menytillståndet när sidan laddas
     if (menuToggle.getAttribute('aria-expanded') === 'true') {
-        dropdownMenu.classList.add('show');
+        offCanvasMenu.classList.add('active');
+        menuOverlay.classList.add('active');
         menuToggle.classList.add('active');
+        document.body.classList.add('menu-open'); // Förhindra scrollning när menyn är öppen
     } else {
-        dropdownMenu.classList.remove('show');
+        offCanvasMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
         menuToggle.classList.remove('active');
+        document.body.classList.remove('menu-open');
     }
     
     // Funktion för att kontrollera om vi är i mobilvy
@@ -531,56 +566,123 @@ function initMobileMenu() {
         return window.innerWidth <= 768;
     }
     
-    // Hantera tillstånd för dropdown-menyn
+    // Hantera tillstånd för off-canvas-menyn
     menuToggle.addEventListener('click', function(event) {
         // Prevenir que o clique propague para o document
         event.stopPropagation();
+        event.preventDefault();
         
-        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        console.log('Menu toggle clicked!');
         
-        // Om den redan är expanderad, stäng bara menyn
-        if (isExpanded) {
-            console.log('Menyn är öppen, stänger...');
+        // Implementação mais direta para alternar menu
+        const isActive = offCanvasMenu.classList.contains('active');
+        
+        if (isActive) {
+            console.log('Closing menu');
+            // Certifique-se de fechar o menu completamente
             closeMenu();
-            return;
+        } else {
+            console.log('Opening menu');
+            
+            // Limpar quaisquer estilos inline que possam estar causando problemas
+            offCanvasMenu.removeAttribute('style');
+            
+            // Alternar o estado do botão
+            menuToggle.setAttribute('aria-expanded', 'true');
+            
+            // Ativar menu - usar manipulação direta do DOM e classes CSS
+            offCanvasMenu.classList.add('active');
+            offCanvasMenu.style.right = '0';
+            
+            // Verificar se o menu está realmente visível após adicionar a classe
+            setTimeout(() => {
+                // Se por algum motivo o menu não estiver visível, forçar a visibilidade
+                if (window.getComputedStyle(offCanvasMenu).right !== '0px') {
+                    offCanvasMenu.style.right = '0';
+                }
+                console.log('Menu position after opening:', window.getComputedStyle(offCanvasMenu).right);
+            }, 50);
+            
+            // Garantir que o conteúdo do menu esteja visível
+            const offCanvasContent = offCanvasMenu.querySelector('.off-canvas-content');
+            if (offCanvasContent) {
+                offCanvasContent.style.display = 'flex';
+                offCanvasContent.style.visibility = 'visible';
+                offCanvasContent.style.opacity = '1';
+            }
+            
+            // Garantir que os links do menu estejam visíveis
+            const navItems = offCanvasMenu.querySelectorAll('.nav-item, .nav-item-portfolio-link');
+            navItems.forEach(item => {
+                item.style.visibility = 'visible';
+                item.style.opacity = '1';
+                item.style.display = 'block';
+                
+                const link = item.querySelector('a');
+                if (link) {
+                    link.style.visibility = 'visible';
+                    link.style.opacity = '1';
+                    link.style.display = 'flex';
+                    link.style.pointerEvents = 'auto';
+                }
+            });
+            
+            // Garantir que a lista de navegação esteja visível
+            const navList = offCanvasMenu.querySelector('.nav-list');
+            if (navList) {
+                navList.style.display = 'block';
+                navList.style.visibility = 'visible';
+                navList.style.opacity = '1';
+            }
+            
+            // Ativar overlay
+            if (menuOverlay) {
+                menuOverlay.classList.add('active');
+                menuOverlay.style.display = 'block';
+            }
+            
+            // Animar o ícone hamburger
+            menuToggle.classList.add('active');
+            
+            // Impedir rolagem da página quando menu está aberto
+            document.body.classList.add('menu-open');
+            
+            // Garantir que o container do menu esteja visível
+            const mobileMenuContainer = document.querySelector('.mobile-menu-container');
+            if (mobileMenuContainer) {
+                mobileMenuContainer.style.display = 'block';
+            }
+            
+            // Anunciar para leitores de tela
+            const announcer = document.createElement('div');
+            announcer.setAttribute('aria-live', 'polite');
+            announcer.className = 'sr-only';
+            announcer.textContent = 'Meny öppnad';
+            document.body.appendChild(announcer);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcer);
+            }, 1000);
         }
-        
-        // Om vi kommer hit är det för att öppna menyn
-        console.log('Menyn är stängd, öppnar...');
-        
-        // Alternar o estado do botão
-        menuToggle.setAttribute('aria-expanded', 'true');
-        
-        // Mostrar o dropdown
-        dropdownMenu.classList.add('show');
-        
-        // Animar o ícone hamburger
-        menuToggle.classList.add('active');
-        
-        // Garantir que o container do menu esteja visível
-        const mobileMenuContainer = document.querySelector('.mobile-menu-container');
-        if (mobileMenuContainer) {
-            mobileMenuContainer.style.display = 'block';
-        }
-        
-        // Anunciar para leitores de tela
-        const announcer = document.createElement('div');
-        announcer.setAttribute('aria-live', 'polite');
-        announcer.className = 'sr-only';
-        announcer.textContent = newState ? 'Meny öppnad' : 'Meny stängd';
-        document.body.appendChild(announcer);
-        
-        setTimeout(() => {
-            document.body.removeChild(announcer);
-        }, 1000);
     });
     
     // Funktion för att stänga menyn
     function closeMenu() {
-        console.log('Stänger dropdown-menyn');
+        console.log('Stänger off-canvas-menyn');
         
-        // Ta bort show-klassen från dropdown
-        dropdownMenu.classList.remove('show');
+        // Ta bort aktiva klasser från menu och overlay
+        offCanvasMenu.classList.remove('active');
+        if (menuOverlay) menuOverlay.classList.remove('active');
+        
+        // Garantir que o menu volte para fora da tela
+        offCanvasMenu.style.right = '-280px';
+        offCanvasMenu.style.transform = 'translateX(0)';
+        offCanvasMenu.style.visibility = 'hidden';
+        offCanvasMenu.style.opacity = '0';
+        offCanvasMenu.style.pointerEvents = 'none';
+        
+        // Remover todos os estilos inline que possam estar interferindo, mas manter os de visibilidade
+        offCanvasMenu.style.display = 'flex'; // Mantemos display flex para preservar a estrutura
         
         // Återställ knappens tillstånd
         menuToggle.setAttribute('aria-expanded', 'false');
@@ -592,6 +694,15 @@ function initMobileMenu() {
             hamburger.classList.remove('active');
         }
         
+        // Ocultar overlay completamente
+        if (menuOverlay) {
+            menuOverlay.style.display = 'none';
+            menuOverlay.classList.remove('active');
+        }
+        
+        // Förhindra scrollning av sidan när menyn är stängd
+        document.body.classList.remove('menu-open');
+        
         // Anunciar para leitores de tela
         const announcer = document.createElement('div');
         announcer.setAttribute('aria-live', 'polite');
@@ -602,12 +713,37 @@ function initMobileMenu() {
         setTimeout(() => {
             document.body.removeChild(announcer);
         }, 1000);
+        
+        // Adicionar evento para verificar se o menu fechou completamente
+        const checkMenuClosed = () => {
+            const menuRight = window.getComputedStyle(offCanvasMenu).right;
+            console.log("Menu position after closing:", menuRight);
+            
+            if (menuRight !== '-280px') {
+                console.warn("Menu didn't close properly, forcing closure");
+                offCanvasMenu.style.right = '-280px';
+                offCanvasMenu.style.visibility = 'hidden';
+                offCanvasMenu.style.opacity = '0';
+                offCanvasMenu.style.pointerEvents = 'none';
+                offCanvasMenu.style.transform = 'translateX(0)';
+                
+                // Não precisamos mais tornar o menu visível após fechá-lo
+            }
+        };
+        
+        // Verificar após a transição terminar
+        setTimeout(checkMenuClosed, 350);
     }
     
     // Fechar menu ao clicar em links de navegação
-    const navLinks = dropdownMenu.querySelectorAll('a');
-    navLinks.forEach(link => {
+    const navLinks = offCanvasMenu.querySelectorAll('a');
+    console.log('Links de navegação encontrados no menu:', navLinks.length);
+    
+    navLinks.forEach((link, index) => {
+        console.log(`Link ${index + 1}:`, link.textContent.trim(), link.getAttribute('href'));
+        
         link.addEventListener('click', function(e) {
+            console.log('Link clicado:', this.textContent.trim());
             // Fechar o menu
             closeMenu();
             
@@ -631,31 +767,32 @@ function initMobileMenu() {
         });
     });
     
-    // Adicionar evento de click diretamente ao elemento hamburger
-    const hamburgerElement = menuToggle.querySelector('.hamburger');
-    if (hamburgerElement) {
-        hamburgerElement.addEventListener('click', function(event) {
+    // Fechar a janela ao clicar no botão de fechar
+    if (closeButton) {
+        closeButton.addEventListener('click', function(event) {
+            console.log('Close button clicked');
+            event.preventDefault();
             event.stopPropagation();
-            
-            // Se o menu estiver expandido, fecha
-            if (menuToggle.getAttribute('aria-expanded') === 'true') {
-                closeMenu();
-            } else {
-                // Alternar o estado do botão para abrir
-                menuToggle.setAttribute('aria-expanded', 'true');
-                menuToggle.classList.add('active');
-                dropdownMenu.classList.add('show');
-            }
+            closeMenu();
+        });
+    }
+
+    // Fechar a janela ao clicar no overlay
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', function(event) {
+            console.log('Overlay clicked');
+            event.preventDefault();
+            event.stopPropagation();
+            closeMenu();
         });
     }
     
-    // Fechar o dropdown ao clicar em qualquer lugar fora do menu
-    document.addEventListener('click', function(event) {
-        if (dropdownMenu.classList.contains('show') && 
-            !dropdownMenu.contains(event.target) && 
-            !menuToggle.contains(event.target)) {
+    // Fechar o menu ao clicar em links (para navegação suave)
+    const menuLinks = offCanvasMenu.querySelectorAll('a[href^="#"]');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
             closeMenu();
-        }
+        });
     });
     
     // Tornar o header mais compacto ao rolar
@@ -687,8 +824,27 @@ function initMobileMenu() {
     
     // Fechar menu ao redimensionar a janela
     window.addEventListener('resize', () => {
-        if (dropdownMenu.classList.contains('show')) {
+        if (offCanvasMenu.classList.contains('active')) {
             closeMenu();
+        }
+    });
+    
+    // Implementar fechamento do menu com a tecla Escape
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && offCanvasMenu.classList.contains('active')) {
+            closeMenu();
+        }
+    });
+    
+    // Melhorar acessibilidade focando no primeiro elemento quando o menu é aberto
+    menuToggle.addEventListener('click', function() {
+        if (offCanvasMenu.classList.contains('active')) {
+            setTimeout(() => {
+                const firstElement = offCanvasMenu.querySelector('a:first-of-type');
+                if (firstElement) {
+                    firstElement.focus();
+                }
+            }, 100);
         }
     });
 }
@@ -2274,3 +2430,139 @@ function initializeNyHeader() {
         }
     }
 }
+
+// =======================================
+// ACESSIBILIDADE MENU FORA DA TELA
+// =======================================
+function setupTrapFocus() {
+    const offCanvasMenu = document.querySelector('.off-canvas-menu');
+    
+    if (!offCanvasMenu) return;
+    
+    // Elementos focáveis dentro do menu
+    const getFocusableElements = () => {
+        return Array.from(
+            offCanvasMenu.querySelectorAll(
+                'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+            )
+        ).filter(el => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'));
+    };
+    
+    // Função para manter o foco dentro do menu
+    const trapFocus = (event) => {
+        if (!offCanvasMenu.classList.contains('active')) return;
+        
+        const focusableElements = getFocusableElements();
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+        
+        // Se não houver elementos focáveis, retornamos
+        if (focusableElements.length === 0) return;
+        
+        // Se estiver pressionando Tab sem Shift
+        if (event.key === 'Tab' && !event.shiftKey) {
+            // Se o elemento ativo é o último, movemos para o primeiro
+            if (document.activeElement === lastElement) {
+                event.preventDefault();
+                firstElement.focus();
+            }
+        }
+        
+        // Se estiver pressionando Tab com Shift
+        if (event.key === 'Tab' && event.shiftKey) {
+            // Se o elemento ativo é o primeiro, movemos para o último
+            if (document.activeElement === firstElement) {
+                event.preventDefault();
+                lastElement.focus();
+            }
+        }
+    };
+    
+    // Adicionar listener quando o menu estiver ativo
+    const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            if (mutation.attributeName === 'class') {
+                if (offCanvasMenu.classList.contains('active')) {
+                    document.addEventListener('keydown', trapFocus);
+                } else {
+                    document.removeEventListener('keydown', trapFocus);
+                }
+            }
+        }
+    });
+    
+    observer.observe(offCanvasMenu, { attributes: true });
+}
+
+// Inicializar o trap focus quando o documento estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+    // Adiciona a inicialização do trapFocus no final do DOMContentLoaded
+    setupTrapFocus();
+});
+
+// =======================================
+// SUPORTE A GESTOS DE DESLIZE
+// =======================================
+function setupSwipeGestures() {
+    const offCanvasMenu = document.querySelector('.off-canvas-menu');
+    
+    if (!offCanvasMenu) return;
+    
+    // Variáveis para rastrear o toque
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const minSwipeDistance = 100; // Distância mínima para considerar como um swipe (em pixels)
+    
+    // Buscar a função closeMenu do escopo parent
+    let closeMenuFunction = null;
+    
+    // Inicializa eventos de toque
+    offCanvasMenu.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    
+    offCanvasMenu.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+    }, { passive: true });
+    
+    // Função para lidar com o gesto de deslize
+    const handleSwipe = () => {
+        // Verifica se o menu está ativo
+        if (!offCanvasMenu.classList.contains('active')) return;
+        
+        // Calcula a distância do gesto
+        const swipeDistance = touchStartX - touchEndX;
+        
+        // Se o usuário deslizou da direita para a esquerda (fechando o menu)
+        if (swipeDistance > minSwipeDistance) {
+            // Procura pela instância da função closeMenu
+            if (!closeMenuFunction) {
+                // Busca no contexto global
+                const mobileMenuButtons = document.querySelectorAll('.menu-toggle, .off-canvas-close');
+                
+                for (const button of mobileMenuButtons) {
+                    const clickEvent = new MouseEvent('click', {
+                        bubbles: true,
+                        cancelable: true,
+                        view: window
+                    });
+                    
+                    // Tenta fechar o menu simulando um clique no botão de fechar
+                    button.dispatchEvent(clickEvent);
+                    
+                    // Se isso funcionou, saímos do loop
+                    if (!offCanvasMenu.classList.contains('active')) {
+                        break;
+                    }
+                }
+            }
+        }
+    };
+}
+
+// Inicializar gestos de deslize quando o documento estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+    // Adiciona essa linha perto das outras inicializações
+    setupSwipeGestures();
+});

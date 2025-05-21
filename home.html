@@ -26,8 +26,17 @@
             }
             
             document.addEventListener('DOMContentLoaded', function() {
-                const menuToggle = document.querySelector('.menu-toggle');
+                // Melhorar interação com o botão de menu em dispositivos touch
+                const menuToggle = document.querySelector('.menu-toggle, .off-canvas-trigger');
                 if (menuToggle) {
+                    // Garantir que o botão esteja visível em dispositivos móveis
+                    if (window.innerWidth <= 768) {
+                        menuToggle.style.display = 'flex';
+                        menuToggle.style.visibility = 'visible';
+                        menuToggle.style.opacity = '1';
+                    }
+                    
+                    // Melhorar interação touch
                     menuToggle.addEventListener('touchend', function(e) {
                         e.preventDefault();
                         this.click();
@@ -41,6 +50,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     
     <!-- Typsnitt och stil -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -51,12 +61,11 @@
     <link rel="stylesheet" href="./css/utilities.css">
     <link rel="stylesheet" href="./css/themes.css">
     <link rel="stylesheet" href="./css/animations.css">
-    <link rel="stylesheet" href="./css/mobile-fix.css"><!-- Fix för visningsproblem på mobila enheter -->
     <link rel="stylesheet" href="./css/gallery-enhancements.css"><!-- Förbättringar för galleriet -->
     <link rel="stylesheet" href="./css/lightbox.css"><!-- Avancerad bildvisare för galleriet -->
     <link rel="stylesheet" href="./css/header.css"><!-- Optimerad header med förbättrat stöd för teman -->
     <link rel="stylesheet" href="./css/theme-transition.css"><!-- Animationer för tema byten -->
-    <link rel="stylesheet" href="./css/mobile-menu-fix.css"><!-- Fix för mobil meny hamburger knapp -->
+    <link rel="stylesheet" href="./css/responsive.css"><!-- Konsoliderad responsivitet för alla enheter -->
 </head>
 <body>
     <!-- Flytande navigering med framstegsindikator -->
@@ -124,24 +133,38 @@
                     <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
                 <div class="mobile-menu-container">
-                    <button class="menu-toggle control-button" aria-expanded="false" aria-label="Öppna meny">
-                        <div class="hamburger">
+                    <button class="menu-toggle off-canvas-trigger control-button" aria-expanded="false" aria-label="Öppna meny">
+                        <div class="hamburger" aria-hidden="true">
+                            <span></span>
+                            <span></span>
                             <span></span>
                         </div>
                     </button>
-                    <!-- Dropdown menu -->
-                    <div class="dropdown-menu">
-                        <ul class="nav-list">
-                            <li class="nav-item"><a href="#introduktion" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> Introduktion</a></li>
-                            <li class="nav-item"><a href="#resultat"><i class="fas fa-chart-bar" aria-hidden="true"></i> Resultat</a></li>
-                            <li class="nav-item"><a href="#kontakt"><i class="fas fa-envelope" aria-hidden="true"></i> Kontakt</a></li>
-                            <li class="nav-item"><a href="#dokument"><i class="fas fa-file-pdf" aria-hidden="true"></i> Dokument</a></li>
-                            <li class="nav-item portfolio-link-mobile"><a href="https://www.raigmsportfolio.com/" target="_blank" rel="noopener noreferrer" class="pulse-button-mobile"><i class="fas fa-globe" aria-hidden="true"></i> Portfolio</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Off-canvas menu overlay -->
+        <div class="menu-overlay" role="presentation"></div>
+        
+        <!-- Off-canvas menu -->
+        <nav class="off-canvas-menu" aria-label="Mobilmeny">
+            <button class="off-canvas-close" aria-label="Stäng meny">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <div class="menu-header">
+                <span class="menu-title">Navigation</span>
+            </div>
+            <div class="off-canvas-content">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#introduktion" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> Introduktion</a></li>
+                    <li class="nav-item"><a href="#resultat"><i class="fas fa-chart-bar" aria-hidden="true"></i> Resultat</a></li>
+                    <li class="nav-item"><a href="#kontakt"><i class="fas fa-envelope" aria-hidden="true"></i> Kontakt</a></li>
+                    <li class="nav-item"><a href="#dokument"><i class="fas fa-file-pdf" aria-hidden="true"></i> Dokument</a></li>
+                    <li class="nav-item-portfolio-link"><a href="https://www.raigmsportfolio.com/" target="_blank" rel="noopener noreferrer" class="pulse-button-mobile"><i class="fas fa-globe" aria-hidden="true"></i> Portfolio</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
 
     <main id="main-content">
@@ -837,7 +860,7 @@
     <!-- Skript -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js" integrity="sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA=" crossorigin="anonymous"></script>
 
-  <script src="./js/home.js"></script>
-    <script src="./js/mobile-menu.js"></script>
+    <script src="./js/home.js"></script>
+    <script src="./js/debug.js"></script>
 </body>
 </html>
